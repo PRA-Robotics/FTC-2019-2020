@@ -4,7 +4,7 @@ public class Intake {
     private double power;
 
     Intake() {
-        power = 1.0;
+        //power = 1.0;
     }
 
     public void run(DcMotor a, DcMotor b) {
