@@ -42,11 +42,11 @@ public class RemoteControl extends OpMode {
     blDrive.setPower((Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2)  * Math.min(1 , 1 + gamepad1.right_stick_x));
     brDrive.setPower((Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
 
-    /*while (gamepad1.right_bumper) {
+    while (gamepad1.right_bumper) {
         irDrive.setPower(IntakePower);
         //Telemetry.addData("yooo");
         ilDrive.setPower(IntakePower);
-    }*/
+    }
 
     if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) == 0){
       /*motors[0].setPower(-gamepad1.right_stick_x*.6);
