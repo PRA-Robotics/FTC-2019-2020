@@ -13,7 +13,7 @@ public class RemoteControl extends OpMode {
   public DcMotor ilDrive;
   final double IntakePower = 1.0;
 
-  //public Intake greenIn = new Intake();
+  public Intake greenIn;
 
   public void init(){
       /*DcMotor[0] = hardwareMap.get(DcMotor.class, "flDrive");
@@ -30,6 +30,7 @@ public class RemoteControl extends OpMode {
     ilDrive = hardwareMap.get(DcMotor.class, "ilDrive");
     blDrive.setDirection(DcMotor.Direction.REVERSE);
     irDrive.setDirection(DcMotor.Direction.REVERSE);
+    Intake greenIn = new Intake(hardwareMap);
   }
 
   public void loop(){
@@ -43,9 +44,8 @@ public class RemoteControl extends OpMode {
     brDrive.setPower((Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
 
     while (gamepad1.right_bumper) {
-        irDrive.setPower(IntakePower);
+        greenIn.run();
         //Telemetry.addData("yooo");
-        ilDrive.setPower(IntakePower);
     }
 
     if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) == 0){

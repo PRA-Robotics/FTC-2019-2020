@@ -1,15 +1,24 @@
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.*;
 
 public class Intake {
     private double power;
+    DcMotor IntakeRight;
+    DcMotor IntakeLeft;
 
-    Intake() {
-        //power = 1.0;
+    Intake(DcMotor a, DcMotor b) {
+        power = 1.0;
+        IntakeLeft = a;
+        IntakeRight = b;
     }
 
-    public void run(DcMotor a, DcMotor b) {
-        a.setPower(power);
-        b.setPower(power);
+    Intake(hardwareMap hw) {
+      IntakeRight = hw.get(DcMotor.class, "irDrive");
+      IntakeLeft = hw.get(DcMotor.class, "ilDrive");;
+    }
+
+    public void run() {
+        IntakeLeft.setPower(power);
+        IntakeRight.setPower(power);
         //irDrive.setPower(power);
         //ilDrive.setPower(power);
     }
