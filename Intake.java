@@ -11,7 +11,7 @@ public class Intake {
         IntakeRight = b;
     }
 
-    Intake(hardwareMap hw) {
+    Intake(HardwareMap hw) {
       IntakeRight = hw.get(DcMotor.class, "irDrive");
       IntakeLeft = hw.get(DcMotor.class, "ilDrive");;
     }
