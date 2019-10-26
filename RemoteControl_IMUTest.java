@@ -5,6 +5,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import com.qualcomm.robotcore.util.RobotLog;
 // end IMU Test add
 
@@ -13,7 +15,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name="Remote Control IMU Tesnt", group="TeleOp")
-public class RemoteControlIMUTest extends OpMode{
+public class RemoteControl_IMUTest extends OpMode{
   public DcMotor flDrive;
   public DcMotor frDrive;
   public DcMotor blDrive;
@@ -27,6 +29,12 @@ public class RemoteControlIMUTest extends OpMode{
 
 // Add IMU Test
   public BNO055IMU imu;
+  public BNO055IMU imu2;
+
+  Orientation angles;
+  Orientation angles2;
+  Acceleration gravity;
+  Acceleration gravity2;
 // End IMU Test
 
   public void init(){
@@ -65,10 +73,6 @@ public class RemoteControlIMUTest extends OpMode{
     BNO055IMU.Parameters imuParameters;
     BNO055IMU.Parameters imu2Parameters;
 
-    Orientation angles;
-    Orientation angles2;
-    Acceleration gravity;
-    Acceleration gravity2;
 
     imu = hardwareMap.get(BNO055IMU.class, "imu");
     imu2 = hardwareMap.get(BNO055IMU.class, "imu");
@@ -93,7 +97,11 @@ public class RemoteControlIMUTest extends OpMode{
     imu.write8(BNO055IMU.Register.OPR_MODE,BNO055IMU.SensorMode.CONFIG.bVal & 0x0F);
     imu2.write8(BNO055IMU.Register.OPR_MODE,BNO055IMU.SensorMode.CONFIG.bVal & 0x0F);
 
-    sleep(100); //Changing modes requires a delay before doing anything else
+   try {
+        Thread.sleep(100);
+    } catch (InterruptedException ex) {
+        //ToCatchOrNot
+    } //Changing modes requires a delay before doing anything else
 
     //Write to the AXIS_MAP_CONFIG register
     imu.write8(BNO055IMU.Register.AXIS_MAP_CONFIG,AXIS_MAP_CONFIG_BYTE & 0x3F);
@@ -107,7 +115,11 @@ public class RemoteControlIMUTest extends OpMode{
     imu.write8(BNO055IMU.Register.OPR_MODE,BNO055IMU.SensorMode.IMU.bVal & 0x0F);
     imu2.write8(BNO055IMU.Register.OPR_MODE,BNO055IMU.SensorMode.IMU.bVal & 0x0F);
 
-    sleep(100); //Changing modes again requires a delay
+    try {
+        Thread.sleep(100);
+    } catch (InterruptedException ex) {
+        //ToCatchOrNot
+    } //Changing modes again requires a delay
   }
 
   public void loop(){
@@ -157,7 +169,7 @@ public class RemoteControlIMUTest extends OpMode{
     //End IMU Test
 
     }
-  }
+  
 
 
   public void motorInit(DcMotor m){
@@ -169,4 +181,4 @@ public class RemoteControlIMUTest extends OpMode{
 
   }
 }
-*/
+
