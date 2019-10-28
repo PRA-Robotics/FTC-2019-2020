@@ -23,8 +23,6 @@ public class Autobot extends OpMode{
     motorInit(brDrive);
 
     blDrive.setDirection(DcMotor.Direction.REVERSE);
-
-
   }
 
   public void start(){
@@ -32,7 +30,7 @@ public class Autobot extends OpMode{
   }
 
   public void loop(){
-    
+
   }
 
   public void drive(double distance, double angle){
@@ -55,17 +53,14 @@ public class Autobot extends OpMode{
       telemetry.addData("Current:", flDrive.getCurrentPosition());
       telemetry.addData("power:", flDrive.getPower());
       telemetry.update();
-      flDrive.setPower(logistic(- flPosition + flDrive.getCurrentPosition()));
-      frDrive.setPower(logistic(- frPosition + frDrive.getCurrentPosition()));
-      blDrive.setPower(logistic(- blPosition + blDrive.getCurrentPosition()));
-      brDrive.setPower(logistic(- brPosition + brDrive.getCurrentPosition()));
+      runTo(flDrive, (int)flPosition);
+      runTo(frDrive, (int)frPosition);
+      runTo(blDrive, (int)blPosition);
+      runTo(brDrive, (int)brPosition);
     }
     /*
     while(Math.sqrt(Math.pow(flPosition - flDrive.getCurrentPosition(), 2) + Math.pow(frPosition - frDrive.getCurrentPosition(), 2) + Math.pow(blPosition - blDrive.getCurrentPosition(), 2) + Math.pow(brPosition - brDrive.getCurrentPosition(), 2)) > 100){
-      flDrive.setPower(flPosition - flDrive.getCurrentPosition());
-      frDrive.setPower(frPosition - frDrive.getCurrentPosition());
-      blDrive.setPower(blPosition - blDrive.getCurrentPosition());
-      brDrive.setPower(brPosition - brDrive.getCurrentPosition());
+
     }
     */
     flDrive.setPower(0);
@@ -78,8 +73,14 @@ public class Autobot extends OpMode{
     return 2 / (1 + Math.pow(2.71828, -input/1000)) - 1;
   }
 
+  public void runTo(DcMotor m, int position){
+    m.setTargetPosition(position);
+    m.setPower(1);
+  }
+
   public void motorInit(DcMotor m){
     m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    m.setMode(DcMotor.RunMode.RUN_TO_POSITION);
   }
 }

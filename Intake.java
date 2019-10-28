@@ -12,6 +12,7 @@ public class Intake {
     }
 
     Intake(HardwareMap hw) {
+      power = 1;
       IntakeRight = hw.get(DcMotor.class, "irDrive");
       IntakeLeft = hw.get(DcMotor.class, "ilDrive");;
     }
@@ -21,6 +22,11 @@ public class Intake {
         IntakeRight.setPower(power);
         //irDrive.setPower(power);
         //ilDrive.setPower(power);
+    }
+
+    public void stop(){
+      IntakeLeft.setPower(0);
+      IntakeRight.setPower(0);
     }
 
     public double getPower() {
