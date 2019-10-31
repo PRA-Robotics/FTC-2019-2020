@@ -9,8 +9,19 @@ public class Autobot extends OpMode{
   public DcMotor blDrive;
   public DcMotor brDrive;
   static final double CIRCUMFERENCE = .1256637;
-  static final int INC_PER_METER = 1000;
-
+  static final int INC_PER_METER = 500;
+  double distance = 1;
+  double angle = 0;
+  double flFinal;
+  double frFinal;
+  double blFinal;
+  double brFinal;
+  double flPosition;
+  double frPosition;
+  double blPosition;
+  double brPosition;
+  int increments;
+  int q = 0;
   public void init(){
     flDrive = hardwareMap.get(DcMotor.class, "flDrive");
     frDrive = hardwareMap.get(DcMotor.class, "frDrive");
@@ -22,55 +33,46 @@ public class Autobot extends OpMode{
     motorInit(blDrive);
     motorInit(brDrive);
 
-    blDrive.setDirection(DcMotor.Direction.REVERSE);
+    //blDrive.setDirection(DcMotor.Direction.REVERSE);
+    flDrive.setDirection(DcMotor.Direction.REVERSE);
   }
 
   public void start(){
-    drive(1, 0);
+    flFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
+    frFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);
+    blFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
+    brFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);
+    flPosition = flDrive.getCurrentPosition();
+    frPosition = frDrive.getCurrentPosition();
+    blPosition = blDrive.getCurrentPosition();
+    brPosition = brDrive.getCurrentPosition();
+    increments = (int) (distance * INC_PER_METER);
   }
 
   public void loop(){
-
-  }
-
-  public void drive(double distance, double angle){
-    double flFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
-    double frFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);
-    double blFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
-    double brFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);
-    double flPosition = flDrive.getCurrentPosition();
-    double frPosition = frDrive.getCurrentPosition();
-    double blPosition = blDrive.getCurrentPosition();
-    double brPosition = brDrive.getCurrentPosition();
-    int increments = (int) (distance * INC_PER_METER);
-    for(int i = 0; i < increments; i ++){
+    if(q < increments){
       flPosition += flFinal/increments;
       frPosition += frFinal/increments;
       blPosition += blFinal/increments;
       brPosition += brFinal/increments;
-      telemetry.addData("Final-goal:", flFinal);
-      telemetry.addData("current goal:", flPosition);
-      telemetry.addData("Current:", flDrive.getCurrentPosition());
-      telemetry.addData("power:", flDrive.getPower());
+
+      telemetry.addData("fl:", flDrive.getCurrentPosition());
+      telemetry.addData("fr:", frDrive.getCurrentPosition());
+      telemetry.addData("bl:", blDrive.getCurrentPosition());
+      telemetry.addData("br:", brDrive.getCurrentPosition());
       telemetry.update();
+
       runTo(flDrive, (int)flPosition);
       runTo(frDrive, (int)frPosition);
       runTo(blDrive, (int)blPosition);
       runTo(brDrive, (int)brPosition);
+      q ++;
+    }else{
+      flDrive.setPower(0);
+      frDrive.setPower(0);
+      blDrive.setPower(0);
+      brDrive.setPower(0);
     }
-    /*
-    while(Math.sqrt(Math.pow(flPosition - flDrive.getCurrentPosition(), 2) + Math.pow(frPosition - frDrive.getCurrentPosition(), 2) + Math.pow(blPosition - blDrive.getCurrentPosition(), 2) + Math.pow(brPosition - brDrive.getCurrentPosition(), 2)) > 100){
-
-    }
-    */
-    flDrive.setPower(0);
-    frDrive.setPower(0);
-    blDrive.setPower(0);
-    brDrive.setPower(0);
-  }
-
-  public double logistic(double input){
-    return 2 / (1 + Math.pow(2.71828, -input/1000)) - 1;
   }
 
   public void runTo(DcMotor m, int position){
