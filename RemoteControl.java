@@ -32,6 +32,7 @@ public class RemoteControl extends OpMode {
     motorInit(brDrive);
 
     blDrive.setDirection(DcMotor.Direction.REVERSE);
+    flDrive.setDirection(DcMotor.Direction.REVERSE);
     irDrive.setDirection(DcMotor.Direction.REVERSE);
     greenIn = new Intake(hardwareMap);
   }
@@ -59,5 +60,6 @@ public class RemoteControl extends OpMode {
   public void motorInit(DcMotor m){
     m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
   }
 }

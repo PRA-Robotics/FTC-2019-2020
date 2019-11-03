@@ -9,7 +9,8 @@ public class Autobot extends OpMode{
   public DcMotor blDrive;
   public DcMotor brDrive;
   static final double CIRCUMFERENCE = .1256637;
-  static final int INC_PER_METER = 500;
+  static final int INC_PER_METER = 50;
+  double correctionFactor = 100/236.5;
   double distance = 1;
   double angle = 0;
   double flFinal;
@@ -34,14 +35,14 @@ public class Autobot extends OpMode{
     motorInit(brDrive);
 
     //blDrive.setDirection(DcMotor.Direction.REVERSE);
-    flDrive.setDirection(DcMotor.Direction.REVERSE);
+    //flDrive.setDirection(DcMotor.Direction.REVERSE);
   }
 
   public void start(){
-    flFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
-    frFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);
-    blFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
-    brFinal = 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);
+    flFinal = correctionFactor * 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
+    frFinal = correctionFactor * 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);
+    blFinal = correctionFactor * 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
+    brFinal = correctionFactor * 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);
     flPosition = flDrive.getCurrentPosition();
     frPosition = frDrive.getCurrentPosition();
     blPosition = blDrive.getCurrentPosition();
@@ -56,10 +57,9 @@ public class Autobot extends OpMode{
       blPosition += blFinal/increments;
       brPosition += brFinal/increments;
 
-      telemetry.addData("fl:", flDrive.getCurrentPosition());
-      telemetry.addData("fr:", frDrive.getCurrentPosition());
-      telemetry.addData("bl:", blDrive.getCurrentPosition());
-      telemetry.addData("br:", brDrive.getCurrentPosition());
+      telemetry.addData("Current:", flDrive.getCurrentPosition());
+      telemetry.addData("Target:", flDrive.getTargetPosition());
+      telemetry.addData("Final:", flFinal);
       telemetry.update();
 
       runTo(flDrive, (int)flPosition);
@@ -82,7 +82,8 @@ public class Autobot extends OpMode{
 
   public void motorInit(DcMotor m){
     m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    m.setTargetPosition(0);
     m.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
   }
 }
