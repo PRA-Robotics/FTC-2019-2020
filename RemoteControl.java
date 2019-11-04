@@ -45,6 +45,8 @@ public class RemoteControl extends OpMode {
 
     if (gamepad1.right_bumper) {
       greenIn.run();
+    }else if(gamepad1.left_bumper){
+      greenIn.reverse();
     }else{
       greenIn.stop();
     }

@@ -24,6 +24,11 @@ public class Intake {
         //ilDrive.setPower(power);
     }
 
+    public void reverse(){
+      IntakeLeft.setPower(-power);
+      IntakeRight.setPower(-power);
+    }
+
     public void stop(){
       IntakeLeft.setPower(0);
       IntakeRight.setPower(0);
