@@ -1,7 +1,7 @@
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.*;
 
 @TeleOp(name="Remote Control", group="TeleOp")
 public class RemoteControl extends OpMode {
@@ -12,6 +12,7 @@ public class RemoteControl extends OpMode {
   public DcMotor brDrive;
   public DcMotor irDrive;
   public DcMotor ilDrive;
+  public NormalizedColorSensor colorSensor;
 
   final double IntakePower = 1.0;
 
@@ -25,6 +26,10 @@ public class RemoteControl extends OpMode {
     brDrive = hardwareMap.get(DcMotor.class, "brDrive");
     irDrive = hardwareMap.get(DcMotor.class, "irDrive");
     ilDrive = hardwareMap.get(DcMotor.class, "ilDrive");
+    colorSensor = hardwareMap.get(NormalizedColorSensor.class, "colorSensor");
+    if (colorSensor instanceof SwitchableLight) {
+      ((SwitchableLight)colorSensor).enableLight(true);
+    }
 
     motorInit(flDrive);
     motorInit(frDrive);
@@ -42,7 +47,13 @@ public class RemoteControl extends OpMode {
     frDrive.setPower(.5 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
     blDrive.setPower(.5 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2)  * Math.min(1 , 1 + gamepad1.right_stick_x));
     brDrive.setPower(.5 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
-
+    NormalizedRGBA colors = colorSensor.getNormalizedColors();
+    float max = Math.max(Math.max(Math.max(colors.red, colors.green), colors.blue), colors.alpha);
+    telemetry.addData("blue", colors.blue / max);
+    telemetry.addData("red", colors.red / max);
+    telemetry.addData("green", colors.green / max);
+    telemetry.addData("alpha", colors.alpha / max);
+    telemetry.update();
     if (gamepad1.right_bumper) {
       greenIn.run();
     }else if(gamepad1.left_bumper){
