@@ -26,7 +26,7 @@ public class DriveInstruction extends Instruction{
   }
 
   private boolean isCloseEnough(DcMotor m){
-    if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 20){
+    if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 50){
       return true;
     }
     return false;
