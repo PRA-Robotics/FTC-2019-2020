@@ -1,8 +1,10 @@
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.*;
 
+/**
+ * @author Jackson and Tyler
+ */
 @TeleOp(name="Remote Control", group="TeleOp")
 public class RemoteControl extends OpMode {
 
@@ -12,20 +14,24 @@ public class RemoteControl extends OpMode {
   public DcMotor brDrive;
   public DcMotor irDrive;
   public DcMotor ilDrive;
+  public DcMotor outDrive;
   public NormalizedColorSensor colorSensor;
 
   final double IntakePower = 1.0;
+  private int outPosition;
 
-  public Intake greenIn;
+  public Intake in;
+  public Outtake out;
 
   public void init(){
-
     flDrive = hardwareMap.get(DcMotor.class, "flDrive");
     frDrive = hardwareMap.get(DcMotor.class, "frDrive");
     blDrive = hardwareMap.get(DcMotor.class, "blDrive");
     brDrive = hardwareMap.get(DcMotor.class, "brDrive");
     irDrive = hardwareMap.get(DcMotor.class, "irDrive");
     ilDrive = hardwareMap.get(DcMotor.class, "ilDrive");
+    outDrive = hardwareMap.get(DcMotor.class, "outDrive");
+
     colorSensor = hardwareMap.get(NormalizedColorSensor.class, "colorSensor");
     if (colorSensor instanceof SwitchableLight) {
       ((SwitchableLight)colorSensor).enableLight(true);
@@ -39,7 +45,10 @@ public class RemoteControl extends OpMode {
     blDrive.setDirection(DcMotor.Direction.REVERSE);
     flDrive.setDirection(DcMotor.Direction.REVERSE);
     irDrive.setDirection(DcMotor.Direction.REVERSE);
-    greenIn = new Intake(hardwareMap);
+
+    in = new Intake(hardwareMap);
+    out = new Outtake(hardwareMap);
+    outPosition = out.getPosition();
   }
 
   public void loop(){
@@ -47,20 +56,23 @@ public class RemoteControl extends OpMode {
     frDrive.setPower(.5 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
     blDrive.setPower(.5 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2)  * Math.min(1 , 1 + gamepad1.right_stick_x));
     brDrive.setPower(.5 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
-    NormalizedRGBA colors = colorSensor.getNormalizedColors();
-    float max = Math.max(Math.max(Math.max(colors.red, colors.green), colors.blue), colors.alpha);
-    telemetry.addData("blue", colors.blue / max);
-    telemetry.addData("red", colors.red / max);
-    telemetry.addData("green", colors.green / max);
-    telemetry.addData("alpha", colors.alpha / max);
-    telemetry.update();
+
     if (gamepad1.right_bumper) {
-      greenIn.run();
+      in.run();
     }else if(gamepad1.left_bumper){
-      greenIn.reverse();
+      in.reverse();
     }else{
-      greenIn.stop();
+      in.stop();
     }
+
+    if (gamepad1.dpad_up) {
+      out.runToPosition(outPosition + 50);
+    } else if (gamepad1.dpad_down) {
+      out.runToPosition(outPosition - 50);
+    } else {
+      out.stop();
+    }
+    outPosition = out.getPosition();
 
     if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) == 0){
       flDrive.setPower(-gamepad1.right_stick_x*.6);
