@@ -25,7 +25,13 @@ public class Outtake {
   }
 
   public void close() {
-    
+    outLeft.setPower(1);
+    outRight.setPower(-1);
+  }
+
+  public void open() {
+    outLeft.setPower(-1);
+    outRight.setPower(1);
   }
 
   public void runToPosition(int newPos) {
@@ -33,12 +39,38 @@ public class Outtake {
     outDrive.setPower(1);
   }
 
+  public void runWheelsOut() {
+    OLDrive.setPower(1);
+    ORDrive.setPower(-1);
+  }
+
+  public void runWheelsIn() {
+    OLDrive.setPower(-1);
+    ORDrive.setPower(1);
+  }
+
   public int getPosition() {
     return outDrive.getCurrentPosition();
   }
 
-  public void stop() {
+  public void fullStop() {
+    this.stopMotor();
+    this.stopSides();
+    this.stopWheels();
+  }
+
+  public void stopMotor() {
     outDrive.setPower(0);
+  }
+
+  public void stopSides() {
+    outLeft.setPower(0);
+    outRight.setPower(0);
+  }
+
+  public void stopWheels() {
+    ORDrive.setPower(0);
+    OLDrive.setPower(0);
   }
 
   private boolean isCloseEnough(DcMotor m) {

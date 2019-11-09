@@ -70,9 +70,25 @@ public class RemoteControl extends OpMode {
     } else if (gamepad1.dpad_down) {
       out.runToPosition(outPosition - 50);
     } else {
-      out.stop();
+      out.stopMotor();
     }
     outPosition = out.getPosition();
+
+    if (gamepad1.y) {
+      out.runWheelsOut();
+    } else if (gamepad1.a) {
+      out.runWheelsIn();
+    } else {
+      out.stopWheels();
+    }
+
+    if (gamepad1.x) {
+      out.close();
+    } else if (gamepad1.b) {
+      out.open();
+    } else {
+      out.stopSides();
+    }
 
     if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) == 0){
       flDrive.setPower(-gamepad1.right_stick_x*.6);
