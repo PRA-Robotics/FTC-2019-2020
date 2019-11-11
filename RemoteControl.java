@@ -86,8 +86,6 @@ public class RemoteControl extends OpMode {
       out.close();
     } else if (gamepad1.b) {
       out.open();
-    } else {
-      out.stopSides();
     }
 
     if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) == 0){

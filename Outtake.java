@@ -4,17 +4,17 @@ import com.qualcomm.robotcore.hardware.*;
  * @author Jackson
  */
 public class Outtake {
-  private int drivePos;
+  private int servoPos;
 
   private DcMotor outDrive;
-  private CRServo outLeft;
+  private Servo outLeft;
   private CRServo OLDrive;
-  private CRServo outRight;
+  private Servo outRight;
   private CRServo ORDrive;
 
   public Outtake(HardwareMap hw) {
-    outLeft = hw.get(CRServo.class, "OL");
-    outRight = hw.get(CRServo.class, "OR");
+    outLeft = hw.get(Servo.class, "OL");
+    outRight = hw.get(Servo.class, "OR");
     OLDrive = hw.get(CRServo.class, "OLD");
     ORDrive = hw.get(CRServo.class, "ORD");
 
@@ -25,13 +25,13 @@ public class Outtake {
   }
 
   public void close() {
-    outLeft.setPower(1);
-    outRight.setPower(-1);
+    outLeft.setPosition(0);
+    outRight.setPosition(0.82);
   }
 
   public void open() {
-    outLeft.setPower(-1);
-    outRight.setPower(1);
+    outLeft.setPosition(.4);
+    outRight.setPosition(.4);
   }
 
   public void runToPosition(int newPos) {
@@ -40,13 +40,13 @@ public class Outtake {
   }
 
   public void runWheelsOut() {
-    OLDrive.setPower(1);
-    ORDrive.setPower(-1);
+    OLDrive.setPower(.8);
+    ORDrive.setPower(-0.8);
   }
 
   public void runWheelsIn() {
-    OLDrive.setPower(-1);
-    ORDrive.setPower(1);
+    OLDrive.setPower(-0.8);
+    ORDrive.setPower(.8);
   }
 
   public int getPosition() {
@@ -55,17 +55,11 @@ public class Outtake {
 
   public void fullStop() {
     this.stopMotor();
-    this.stopSides();
     this.stopWheels();
   }
 
   public void stopMotor() {
     outDrive.setPower(0);
-  }
-
-  public void stopSides() {
-    outLeft.setPower(0);
-    outRight.setPower(0);
   }
 
   public void stopWheels() {
@@ -88,4 +82,5 @@ public class Outtake {
     m.setTargetPosition(position);
     m.setPower(1);
   }
+
 }
