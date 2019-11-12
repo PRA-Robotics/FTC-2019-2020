@@ -17,7 +17,6 @@ public class RemoteControl extends OpMode {
   public DcMotor outDrive;
   public NormalizedColorSensor colorSensor;
 
-  final double IntakePower = 1.0;
   private int outPosition;
 
   public Intake in;

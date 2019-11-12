@@ -1,7 +1,7 @@
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.*;
 
-public class Runner extends OpMode {
+public class Runner /*extends OpMode*/ {
   public Intake in;
   public Outtake out;
   public Color c;
