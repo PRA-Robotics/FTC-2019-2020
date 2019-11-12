@@ -30,6 +30,8 @@ public class RedInnerPath extends OpMode {
   double[] skystoneColor = new double[3];
   int SkystoneNum;
 
+  int q;
+
   public void init() {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
@@ -49,7 +51,7 @@ public class RedInnerPath extends OpMode {
 
     turn2 = new TurnInstruction(hardwareMap, -90);
 
-    wait1 = new WaitInstruction(2);
+    wait1 = new WaitInstruction(hardwareMap, 2);
 
     drive11 = new DriveInstruction(hardwareMap, 2.0    * SQUARE, 270);
 

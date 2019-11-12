@@ -4,13 +4,16 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class WaitInstruction extends Instruction {
   static final int MILS_PER_SEC = 1000;
   int finalTime;
+  double seconds;
+  ElapsedTime timer;
 
-  public TurnInstruction(double seconds) {
+  public WaitInstruction(HardwareMap hw, double seconds) {
     super(hw);
-    ElapsedTime timer = new ElapsedTime();
+    timer = new ElapsedTime();
+    this.seconds = seconds;
   }
 
-  private void init() {
+  public void init() {
     finalTime = (int) (seconds * MILS_PER_SEC + timer.milliseconds());
   }
 
