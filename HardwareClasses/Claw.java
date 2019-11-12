@@ -7,7 +7,7 @@ public class Claw {
   double downPos;
   double currentPos;
 
-  MiddlePassage(HardwareMap hw) {
+  Claw(HardwareMap hw) {
     claw = hw.get(Servo.class, "claw");
 
     upPos = claw.getPosition();

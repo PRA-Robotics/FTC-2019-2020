@@ -51,7 +51,7 @@ public class RemoteControl extends OpMode {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
     mid = new MiddlePassage(hardwareMap);
-    claw = new Claw();
+    claw = new Claw(hardwareMap);
 
     outPosition = out.getPosition();
   }
