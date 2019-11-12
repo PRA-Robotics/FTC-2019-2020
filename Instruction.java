@@ -18,8 +18,6 @@ public class Instruction{
   public double blPosition;
   public double brPosition;
   public int increments;
-  //public BNO055IMU imu1;
-  //public BNO055IMU imu2;
 
   public Instruction(HardwareMap hw){
     flDrive = hw.get(DcMotor.class, "flDrive");
@@ -28,8 +26,6 @@ public class Instruction{
     brDrive = hw.get(DcMotor.class, "brDrive");
     irDrive = hw.get(DcMotor.class, "irDrive");
     ilDrive = hw.get(DcMotor.class, "ilDrive");
-    //imu1 = hw.get(BNO055IMU.class, "imu1");
-    //imu2 = hw.get(BNO055IMU.class, "imu2");
     motorInit(flDrive);
     motorInit(frDrive);
     motorInit(blDrive);
