@@ -20,8 +20,6 @@ public class RedInnerPath extends OpMode {
   DriveInstruction drive9;
   DriveInstruction drive10;
   DriveInstruction drive11;
-  //DriveInstruction drive12;
-  //DriveInstruction drive13;
 
   TurnInstruction turn1;
   TurnInstruction turn2;
@@ -141,51 +139,51 @@ public class RedInnerPath extends OpMode {
         }
         break;
 
-      case 11: // grab stone
+      case 12: // grab stone
         in.run();
         if (drive8.act()) {
           q++;
         }
         break;
 
-      case 12: // stop intake, get intake in position
+      case 13: // stop intake, get outtake in position
         in.stop();
         out.close();
         q++;
         break;
 
-      case 13: // move back to switch over
+      case 14: // move back to switch over
         if (drive9.act()) {
           q++;
         }
         break;
 
-      case 14: // cross under bridge
+      case 15: // cross under bridge
         if (drive10.act()) {
           q++;
         }
         break;
 
-      case 15: // turn to be in position to push stone out
+      case 16: // turn to be in position to push stone out
         if (turn2.act()) {
           q++;
         }
         break;
 
-      case 16: // push skystone out
+      case 17: // push skystone out
         out.runWheelsOut();
         if (wait1.act()) {
           q++;
         }
         break;
 
-      case 17: // stop wheels, open outtake to not hit anything while going back
+      case 18: // stop wheels, open outtake to not hit anything while going back
         out.stopWheels();
         out.open();
         q++;
         break;
 
-      case 18: // move back under bridge
+      case 19: // move back under bridge
         if (drive11.act()) {
           q++;
         }

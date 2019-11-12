@@ -23,11 +23,8 @@ public class BlueInnerPath extends OpMode {
   DriveInstruction drive9;
   DriveInstruction drive10;
   DriveInstruction drive11;
-  //DriveInstruction drive12;
-  //DriveInstruction drive13;
 
   TurnInstruction turn1;
-  TurnInstruction turn2;
 
   WaitInstruction wait1;
 
@@ -39,20 +36,18 @@ public class BlueInnerPath extends OpMode {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
 
-    drive1 = new DriveInstruction(hardwareMap, 1.13712 * SQUARE, 270);
-    drive2 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 180);
-    drive3 = new DriveInstruction(hardwareMap, 0.36789 * SQUARE, 180);
-    drive4 = new DriveInstruction(hardwareMap, 0.33445 * SQUARE, 180);
-    drive5 = new DriveInstruction(hardwareMap, 0.5     * SQUARE, 90);
+    drive1 = new DriveInstruction(hardwareMap, 1.13712 * SQUARE, 90);
+    drive2 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 0);
+    drive3 = new DriveInstruction(hardwareMap, 0.36789 * SQUARE, 0);
+    drive4 = new DriveInstruction(hardwareMap, 0.33445 * SQUARE, 0);
+    drive5 = new DriveInstruction(hardwareMap, 0.5     * SQUARE, 270);
 
-    turn1 = new TurnInstruction(hardwareMap, 180);
-
-    drive7 = new DriveInstruction(hardwareMap, .75     * SQUARE, 135);
+    drive7 = new DriveInstruction(hardwareMap, .75     * SQUARE, 225);
     drive8 = new DriveInstruction(hardwareMap, .25     * SQUARE, 0);
-    drive9 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 270);
+    drive9 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 90);
     drive10 = new DriveInstruction(hardwareMap, 3.0    * SQUARE, 180);
 
-    turn2 = new TurnInstruction(hardwareMap, -90);
+    turn1 = new TurnInstruction(hardwareMap, 90);
 
     wait1 = new WaitInstruction(2);
 
@@ -132,13 +127,7 @@ public class BlueInnerPath extends OpMode {
       }
       break;
 
-      case 10: // rotate so we can get the block
-        if (turn1.act()) {
-          q++;
-        }
-        break;
-
-      case 11: // move to intercept skystone
+      case 10: // move to intercept skystone
         if (drive7.act()) {
           q++;
         }
@@ -151,7 +140,7 @@ public class BlueInnerPath extends OpMode {
         }
         break;
 
-      case 12: // stop intake, get intake in position
+      case 12: // stop intake, get outtake in position
         in.stop();
         out.close();
         q++;
@@ -170,7 +159,7 @@ public class BlueInnerPath extends OpMode {
         break;
 
       case 15: // turn to be in position to push stone out
-        if (turn2.act()) {
+        if (turn1.act()) {
           q++;
         }
         break;
