@@ -3,7 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.*;
 
 @Autonomous(name = "Autobot", group = "Autonomous")
-public class Autobot extends OpMode{
+public class Autobot extends OpMode {
   Intake in;
   Outtake out;
   DriveInstruction drive1;
@@ -13,7 +13,9 @@ public class Autobot extends OpMode{
   int q = 0;
   Color c;
   double[] skystoneColor = new double[3];
+
   public void init(){
+    // super(hw);
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
     drive1 = new DriveInstruction(hardwareMap, .22, 180);
