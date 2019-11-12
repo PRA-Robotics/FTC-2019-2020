@@ -2,7 +2,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.*;
 
-@Autonomous(name = "Blue Inner", group = "Autonomous")
+@Autonomous(name = "Blue Outer", group = "Autonomous")
 public class BlueInnerPath extends OpMode {
   Intake in;
   Outtake out;
@@ -33,8 +33,8 @@ public class BlueInnerPath extends OpMode {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
 
-    drive1 = new DriveInstruction(hardwareMap, 1.13712 * SQUARE, 90);
-    drive2 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 0);
+    drive1 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 0);
+    drive2 = new DriveInstruction(hardwareMap, 1.13712 * SQUARE, 270);
     drive3 = new DriveInstruction(hardwareMap, 0.36789 * SQUARE, 0);
     drive4 = new DriveInstruction(hardwareMap, 0.33445 * SQUARE, 0);
     drive5 = new DriveInstruction(hardwareMap, 0.5     * SQUARE, 270);
