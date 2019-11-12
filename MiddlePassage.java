@@ -16,9 +16,6 @@ public class MiddlePassage {
     former = hw.get(Servo.class, "foreMidServo");
     latter = hw.get(Servo.class, "aftMidServo");
 
-
-
-    forePosition = .3;
     changingPosition = AFTPOSITION;
 
     foreStartPosition = 0.0;
@@ -28,7 +25,7 @@ public class MiddlePassage {
   }
 
   public void runFront() {
-    former.setPosition(forePosition);
+    former.setPosition(AFTPOSITION);
   }
 
   public void runBack() {
@@ -40,7 +37,7 @@ public class MiddlePassage {
     latter.setPosition(changingPosition);
   }
 
-  public void init() {
+  public void reset() {
     resetFront();
     resetBack();
   }
