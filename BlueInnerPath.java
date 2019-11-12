@@ -2,8 +2,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.*;
 
-@Autonomous(name = "Red Inner", group = "Autonomous")
-public class RedInnerPath extends OpMode {
+
+/// DIDN'T CHANGE ANYTHING FROM RedInnerPath
+
+@Autonomous(name = "Blue Inner", group = "Autonomous")
+public class BlueInnerPath extends OpMode {
   Intake in;
   Outtake out;
 
