@@ -23,6 +23,7 @@ public class RemoteControl extends OpMode {
   public Intake in;
   public Outtake out;
   public MiddlePassage mid;
+  public Claw claw;
 
   public void init(){
     flDrive = hardwareMap.get(DcMotor.class, "flDrive");
@@ -50,6 +51,8 @@ public class RemoteControl extends OpMode {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
     mid = new MiddlePassage(hardwareMap);
+    claw = new Claw();
+
     outPosition = out.getPosition();
   }
 
@@ -77,6 +80,12 @@ public class RemoteControl extends OpMode {
       mid.runBack();
     } else {
       mid.resetBack();
+    }
+
+    if (gamepad2.right_bumper) {
+      claw.down();
+    } else {
+      claw.reset();
     }
 
     if (gamepad1.dpad_up) {
