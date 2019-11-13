@@ -18,6 +18,8 @@ public class RemoteControl extends OpMode {
   public NormalizedColorSensor colorSensor;
 
   private int outPosition;
+  boolean OutIsClosed = false;
+  int delay = 0;
 
   public Intake in;
   public Outtake out;
@@ -56,10 +58,10 @@ public class RemoteControl extends OpMode {
   }
 
   public void loop(){
-    flDrive.setPower(.5 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 + gamepad1.right_stick_x));
-    frDrive.setPower(.5 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
-    blDrive.setPower(.5 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2)  * Math.min(1 , 1 + gamepad1.right_stick_x));
-    brDrive.setPower(.5 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
+    flDrive.setPower(1.0 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 + gamepad1.right_stick_x));
+    frDrive.setPower(1.0 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
+    blDrive.setPower(1.0 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2)  * Math.min(1 , 1 + gamepad1.right_stick_x));
+    brDrive.setPower(1.0 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
 
     if (gamepad1.right_bumper) {
       in.run();
@@ -69,19 +71,19 @@ public class RemoteControl extends OpMode {
       in.stop();
     }
 
-    if (gamepad2.a) {
-      mid.runFront();
+    if (gamepad2.left_trigger > .05) {
+      mid.runServo();
     } else {
-      mid.resetFront();
+      mid.resetServo();
     }
 
-    if (gamepad2.b) {
-      mid.runBack();
+    if (gamepad2.right_trigger > .05) {
+      mid.runMotor();
     } else {
-      mid.resetBack();
+      mid.stop();
     }
 
-    if (gamepad2.right_bumper) {
+    if (gamepad2.left_bumper) {
       claw.down();
     } else {
       claw.reset();
@@ -96,19 +98,25 @@ public class RemoteControl extends OpMode {
     }
     outPosition = out.getPosition();
 
-    if (gamepad1.y) {
+    if (gamepad2.y) {
       out.runWheelsOut();
-    } else if (gamepad1.a) {
+    } else if (gamepad2.a) {
       out.runWheelsIn();
     } else {
       out.stopWheels();
     }
 
-    if (gamepad1.x) {
-      out.close();
-    } else if (gamepad1.b) {
-      out.open();
+    if (gamepad2.b && delay > 25) {
+      if (!OutIsClosed) {
+        out.close();
+        OutIsClosed = true;
+      } else {
+        out.open();
+        OutIsClosed = false;
+      }
+      delay = 0;
     }
+    delay ++;
 
     if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) == 0){
       flDrive.setPower(-gamepad1.right_stick_x*.6);

@@ -1,54 +1,40 @@
 import com.qualcomm.robotcore.hardware.*;
 
 public class MiddlePassage {
-  Servo former;
-  Servo latter;
+  Servo mid;
+  DcMotor midDrive;
 
-  final double AFTPOSITION = .3;
-  double changingPosition;
-  double foreStartPosition;
-  double latterPosition;
-  double latterStartPosition;
+  final double STARTPOS = .4;
+  double servoPos;
 
-  int q;
 
   MiddlePassage(HardwareMap hw) {
-    former = hw.get(Servo.class, "foreMidServo");
-    latter = hw.get(Servo.class, "aftMidServo");
+    mid = hw.get(Servo.class, "midServo");
+    midDrive = hw.get(DcMotor.class, "midDrive");
 
-    changingPosition = AFTPOSITION;
+    //servoPos = STARTPOS;
 
-    foreStartPosition = 0.0;
-    latterStartPosition = 0.0;
-
-    q = 0;
+    //midDrive.setDirection(DcMotor.Direction.reverse);
   }
 
-  public void runFront() {
-    former.setPosition(AFTPOSITION);
+  public void runServo() {
+    mid.setPosition(servoPos);
   }
 
-  public void runBack() {
-    if (q % 2 == 0) {
-      changingPosition -= (q * .05);
-    } else if (q % 2 == 1) {
-      changingPosition += (q * .05);
-    }
-    latter.setPosition(changingPosition);
+  public void runMotor() {
+    midDrive.setPower(1);
   }
 
   public void reset() {
-    resetFront();
-    resetBack();
+    resetServo();
+    stop();
   }
 
-  public void resetFront() {
-    former.setPosition(foreStartPosition);
+  public void stop() {
+    midDrive.setPower(0);
   }
 
-  public void resetBack() {
-    latter.setPosition(latterStartPosition);
-    changingPosition = AFTPOSITION;
-    q = 0;
+  public void resetServo() {
+    mid.setPosition(STARTPOS);
   }
 }

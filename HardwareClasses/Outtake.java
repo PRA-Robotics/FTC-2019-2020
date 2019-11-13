@@ -39,12 +39,12 @@ public class Outtake {
     outDrive.setPower(1);
   }
 
-  public void runWheelsOut() {
+  public void runWheelsIn() {
     OLDrive.setPower(.8);
     ORDrive.setPower(-0.8);
   }
 
-  public void runWheelsIn() {
+  public void runWheelsOut() {
     OLDrive.setPower(-0.8);
     ORDrive.setPower(.8);
   }

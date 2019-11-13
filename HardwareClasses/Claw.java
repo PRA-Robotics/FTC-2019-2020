@@ -10,9 +10,10 @@ public class Claw {
   Claw(HardwareMap hw) {
     claw = hw.get(Servo.class, "claw");
 
-    upPos = claw.getPosition();
+    //claw.setPosition(.5);
+    upPos = .365;
     currentPos = upPos;
-    downPos = .5;
+    downPos = .31;
   }
 
   public void down() {
