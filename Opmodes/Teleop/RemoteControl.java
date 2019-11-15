@@ -16,6 +16,7 @@ public class RemoteControl extends OpMode {
   public DcMotor ilDrive;
   public DcMotor outDrive;
   public NormalizedColorSensor colorSensor;
+  double speed = 1;
 
   private int outPosition;
   boolean OutIsClosed = false;
@@ -58,24 +59,29 @@ public class RemoteControl extends OpMode {
   }
 
   public void loop(){
-    flDrive.setPower(1.0 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 + gamepad1.right_stick_x));
-    frDrive.setPower(1.0 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
-    blDrive.setPower(1.0 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2)  * Math.min(1 , 1 + gamepad1.right_stick_x));
-    brDrive.setPower(1.0 * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
-
+    if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) != 0){
+      flDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 + gamepad1.right_stick_x));
+      frDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
+      blDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2)  * Math.min(1 , 1 + gamepad1.right_stick_x));
+      brDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
+    }
     if (gamepad1.right_bumper) {
       in.run();
+      mid.runMotor();
     }else if(gamepad1.left_bumper){
       in.reverse();
     }else{
       in.stop();
+      mid.stop();
     }
 
-    if (gamepad2.left_trigger > .05) {
-      mid.runServo();
-    } else {
-      mid.resetServo();
+    if(gamepad1.left_trigger > 0.1){
+      speed = 0.5;
+    }else{
+      speed = 1;
     }
+
+
 
     if (gamepad2.right_trigger > .05) {
       mid.runMotor();
@@ -119,16 +125,16 @@ public class RemoteControl extends OpMode {
     delay ++;
 
     if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) == 0){
-      flDrive.setPower(-gamepad1.right_stick_x*.6);
-      frDrive.setPower(gamepad1.right_stick_x*.6);
-      blDrive.setPower(-gamepad1.right_stick_x*.6);
-      brDrive.setPower(gamepad1.right_stick_x*.6);
+      flDrive.setPower(-gamepad1.right_stick_x*.6 * speed);
+      frDrive.setPower(gamepad1.right_stick_x*.6 * speed);
+      blDrive.setPower(-gamepad1.right_stick_x*.6 * speed);
+      brDrive.setPower(gamepad1.right_stick_x*.6 * speed);
     }
   }
 
   public void motorInit(DcMotor m){
     m.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     m.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+    m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
   }
 }

@@ -27,7 +27,7 @@ public class TurnInstruction extends Instruction {
   }
 
   private boolean isCloseEnough(DcMotor m){
-    if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 50){
+    if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 100){
       return true;
     }
     return false;

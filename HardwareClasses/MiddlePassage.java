@@ -1,15 +1,14 @@
 import com.qualcomm.robotcore.hardware.*;
 
 public class MiddlePassage {
-  Servo mid;
+  //Servo mid;
   DcMotor midDrive;
 
   final double STARTPOS = .4;
   double servoPos;
 
-
   MiddlePassage(HardwareMap hw) {
-    mid = hw.get(Servo.class, "midServo");
+    //mid = hw.get(Servo.class, "midServo");
     midDrive = hw.get(DcMotor.class, "midDrive");
 
     //servoPos = STARTPOS;
@@ -17,16 +16,16 @@ public class MiddlePassage {
     //midDrive.setDirection(DcMotor.Direction.reverse);
   }
 
-  public void runServo() {
+  /*public void runServo() {
     mid.setPosition(servoPos);
-  }
+  }*/
 
   public void runMotor() {
     midDrive.setPower(1);
   }
 
   public void reset() {
-    resetServo();
+    //resetServo();
     stop();
   }
 
@@ -34,7 +33,7 @@ public class MiddlePassage {
     midDrive.setPower(0);
   }
 
-  public void resetServo() {
+  /*public void resetServo() {
     mid.setPosition(STARTPOS);
-  }
+  }*/
 }
