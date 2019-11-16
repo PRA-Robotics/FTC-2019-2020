@@ -24,6 +24,10 @@ public class MiddlePassage {
     midDrive.setPower(1);
   }
 
+  public void runMotorBack() {
+    midDrive.setPower(-1);
+  }
+
   public void reset() {
     //resetServo();
     stop();

@@ -20,7 +20,9 @@ public class RemoteControl extends OpMode {
 
   private int outPosition;
   boolean OutIsClosed = false;
+  boolean clawIsDown;
   int delay = 0;
+  int delay2 = 0;
 
   public Intake in;
   public Outtake out;
@@ -70,6 +72,7 @@ public class RemoteControl extends OpMode {
       mid.runMotor();
     }else if(gamepad1.left_bumper){
       in.reverse();
+      mid.runMotorBack();
     }else{
       in.stop();
       mid.stop();
@@ -81,18 +84,15 @@ public class RemoteControl extends OpMode {
       speed = 1;
     }
 
-
-
-    if (gamepad2.right_trigger > .05) {
-      mid.runMotor();
-    } else {
-      mid.stop();
-    }
-
-    if (gamepad2.left_bumper) {
-      claw.down();
-    } else {
-      claw.reset();
+    if (gamepad2.right_bumper && delay2 > 25) {
+      if (clawIsDown) {
+        claw.reset();
+        clawIsDown = false;
+      } else {
+        claw.down();
+        clawIsDown = true;
+      }
+      delay2 = 0;
     }
 
     if (gamepad1.dpad_up) {
@@ -123,6 +123,7 @@ public class RemoteControl extends OpMode {
       delay = 0;
     }
     delay ++;
+    delay2++;
 
     if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) == 0){
       flDrive.setPower(-gamepad1.right_stick_x*.6 * speed);
