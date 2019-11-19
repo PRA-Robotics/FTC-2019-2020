@@ -84,7 +84,7 @@ public class RemoteControl2 extends OpMode {
       speed = 1;
     }
 
-    if (gamepad1.right_trigger && delay2 > 25) {
+    if (gamepad1.right_trigger > .2 && delay2 > 25) {
       if (clawIsDown) {
         claw.reset();
         clawIsDown = false;

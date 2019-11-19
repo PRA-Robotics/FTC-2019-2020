@@ -37,19 +37,19 @@ public class RedInnerPath extends OpMode {
     out = new Outtake(hardwareMap);
 
     drive1 = new DriveInstruction(hardwareMap, 1.13712 * SQUARE, 270);
-    drive2 = new DriveInstruction(hardwareMap, .5      * SQUARE, 180);
+    drive2 = new DriveInstruction(hardwareMap, .65      * SQUARE, 180);
     drive3 = new DriveInstruction(hardwareMap, 0.36789 * SQUARE, 180);
     drive4 = new DriveInstruction(hardwareMap, 0.33445 * SQUARE, 180);
     drive5 = new DriveInstruction(hardwareMap, 0.2     * SQUARE, 90);
 
     turn1 = new TurnInstruction(hardwareMap, 180);
 
-    drive7 = new DriveInstruction(hardwareMap, .75     * SQUARE, 90);
-    drive8 = new DriveInstruction(hardwareMap, .25     * SQUARE, 0);
+    drive7 = new DriveInstruction(hardwareMap, .5     * SQUARE, 90);
+    drive8 = new DriveInstruction(hardwareMap, .75     * SQUARE, 0);
     drive9 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 270);
     drive10 = new DriveInstruction(hardwareMap, 3.0    * SQUARE, 180);
 
-    turn2 = new TurnInstruction(hardwareMap, 270);
+    turn2 = new TurnInstruction(hardwareMap, 90);
 
     wait1 = new WaitInstruction(hardwareMap, 2);
 
@@ -63,7 +63,7 @@ public class RedInnerPath extends OpMode {
   public void loop() {
     switch(q){
       case 0: // move forward
-        if (drive1.act()) {
+        if (true) {
           q++;
         }
         break;
@@ -104,13 +104,13 @@ public class RedInnerPath extends OpMode {
       case 7: // sets drive6 to a variable distance depending on which stone is skystone
         if ((skystoneColor[0] < skystoneColor[1]) && (skystoneColor[0] < skystoneColor[2])) {
           SkystoneNum = 0;
-          drive6 = new DriveInstruction(hardwareMap, 0.70234 * SQUARE, 0);
+          drive6 = new DriveInstruction(hardwareMap, 1.3 * SQUARE, 0);
         } else if ((skystoneColor[1] < skystoneColor[0]) && (skystoneColor[1] < skystoneColor[2])) {
           SkystoneNum = 1;
-          drive6 = new DriveInstruction(hardwareMap, 0.33445 * SQUARE, 0);
+          drive6 = new DriveInstruction(hardwareMap, 0.8 * SQUARE, 0);
         } else if ((skystoneColor[2] < skystoneColor[0]) && (skystoneColor[2] < skystoneColor[1])) {
           SkystoneNum = 2;
-          drive6 = new DriveInstruction(hardwareMap, 0 * SQUARE, 0);
+          drive6 = new DriveInstruction(hardwareMap, 0.5 * SQUARE, 0);
         } else {
           SkystoneNum = -1;
         }
@@ -192,8 +192,8 @@ public class RedInnerPath extends OpMode {
         break;
     }
 
-    Telemetry.addData("step: " + q);
-    Telemetry.update();
+    telemetry.addData("step", q);
+    telemetry.update();
   }
 
   public double averageColor(){
