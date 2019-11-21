@@ -45,7 +45,7 @@ public class RedInnerPath extends OpMode {
     turn1 = new TurnInstruction(hardwareMap, 180);
 
     drive7 = new DriveInstruction(hardwareMap, .5     * SQUARE, 90);
-    drive8 = new DriveInstruction(hardwareMap, .75     * SQUARE, 0);
+    drive8 = new DriveInstruction(hardwareMap, .75     * SQUARE);
     drive9 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 270);
     drive10 = new DriveInstruction(hardwareMap, 3.0    * SQUARE, 180);
 
@@ -61,9 +61,10 @@ public class RedInnerPath extends OpMode {
   }
 
   public void loop() {
+    /*
     switch(q){
       case 0: // move forward
-        if (true) {
+        if (drive1.act()) {
           q++;
         }
         break;
@@ -104,13 +105,10 @@ public class RedInnerPath extends OpMode {
       case 7: // sets drive6 to a variable distance depending on which stone is skystone
         if ((skystoneColor[0] < skystoneColor[1]) && (skystoneColor[0] < skystoneColor[2])) {
           SkystoneNum = 0;
-          drive6 = new DriveInstruction(hardwareMap, 1.3 * SQUARE, 0);
         } else if ((skystoneColor[1] < skystoneColor[0]) && (skystoneColor[1] < skystoneColor[2])) {
           SkystoneNum = 1;
-          drive6 = new DriveInstruction(hardwareMap, 0.8 * SQUARE, 0);
         } else if ((skystoneColor[2] < skystoneColor[0]) && (skystoneColor[2] < skystoneColor[1])) {
           SkystoneNum = 2;
-          drive6 = new DriveInstruction(hardwareMap, 0.5 * SQUARE, 0);
         } else {
           SkystoneNum = -1;
         }
@@ -123,69 +121,83 @@ public class RedInnerPath extends OpMode {
         }
         break;
 
-      case 9: // move the variable distance
+      case 9:
+        if (SkystoneNum == -1) {
+          drive6 = new DriveInstruction(hardwareMap, 0);
+          q = -1;
+        } else if (SkystoneNum == 0) {
+          drive6 = new DriveInstruction(hardwareMap, 1.3 * SQUARE);
+          turn1 = new TurnInstruction(hardwareMap, 135);
+          drive7 = new DriveInstruction(hardwareMap, 135);
+        } else if (SkystoneNum == 1) {
+          drive6 = new DriveInstruction(hardwareMap, 0.8 * SQUARE);
+        } else if (SkystoneNum == 2) {
+          drive6 = new DriveInstruction(hardwareMap, 0.5 * SQUARE);
+        }
+
+      case 10: // move the variable distance
       if (drive6.act()) {
         q++;
       }
       break;
 
-      case 10: // rotate so we can get the block
+      case 11: // rotate so we can get the block
         if (turn1.act()) {
           q++;
         }
         break;
 
-      case 11: // move to intercept skystone
+      case 12: // move to intercept skystone
         if (drive7.act()) {
           q++;
         }
         break;
 
-      case 12: // grab stone
+      case 13: // grab stone
         in.run();
         if (drive8.act()) {
           q++;
         }
         break;
 
-      case 13: // stop intake, get outtake in position
+      case 14: // stop intake, get outtake in position
         in.stop();
         out.close();
         q++;
         break;
 
-      case 14: // move back to switch over
+      case 15: // move back to switch over
         if (drive9.act()) {
           q++;
         }
         break;
 
-      case 15: // cross under bridge
+      case 16: // cross under bridge
         if (drive10.act()) {
           q++;
         }
         break;
 
-      case 16: // turn to be in position to push stone out
+      case 17: // turn to be in position to push stone out
         if (turn2.act()) {
           q++;
         }
         break;
 
-      case 17: // push skystone out
+      case 18: // push skystone out
         out.runWheelsOut();
         if (wait1.act()) {
           q++;
         }
         break;
 
-      case 18: // stop wheels, open outtake to not hit anything while going back
+      case 19: // stop wheels, open outtake to not hit anything while going back
         out.stopWheels();
         out.open();
         q++;
         break;
 
-      case 19: // move back under bridge
+      case 20: // move back under bridge
         if (drive11.act()) {
           q++;
         }
@@ -194,6 +206,8 @@ public class RedInnerPath extends OpMode {
 
     telemetry.addData("step", q);
     telemetry.update();
+    */
+    drive1.act();
   }
 
   public double averageColor(){

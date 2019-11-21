@@ -3,6 +3,11 @@ import com.qualcomm.robotcore.hardware.*;
 public class DriveInstruction extends Instruction{
   static final int INC_PER_METER = 100;
   static final double CIRCUMFERENCE = .1256637;
+
+  public DriveInstruction(HardwareMap hw, double distance) {
+    this(hw, distance, 0);
+  }
+
   public DriveInstruction(HardwareMap hw, double distance, double angle){
     super(hw);
     double correctionFactor = 100/236.5;
@@ -29,7 +34,7 @@ public class DriveInstruction extends Instruction{
     if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 100){
       return true;
     }
-    return false;
+    return true;
   }
 
   private void end(){

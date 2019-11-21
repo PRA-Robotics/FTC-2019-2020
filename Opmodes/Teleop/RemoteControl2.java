@@ -131,6 +131,8 @@ public class RemoteControl2 extends OpMode {
       blDrive.setPower(-gamepad1.right_stick_x*.6 * speed);
       brDrive.setPower(gamepad1.right_stick_x*.6 * speed);
     }
+    telemetry.addData("motr", brDrive.getPower());
+    telemetry.update();
   }
 
   public void motorInit(DcMotor m){
