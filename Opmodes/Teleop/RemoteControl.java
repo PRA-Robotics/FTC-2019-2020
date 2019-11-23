@@ -62,10 +62,12 @@ public class RemoteControl extends OpMode {
 
   public void loop(){
     if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) != 0){
-      flDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 + gamepad1.right_stick_x));
+      double spd = speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 + gamepad1.right_stick_x);
+      flDrive.setPower(spd);
       frDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
       blDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2)  * Math.min(1 , 1 + gamepad1.right_stick_x));
       brDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
+      telemetry.addData("flpower", spd);
     }
     if (gamepad1.right_bumper) {
       in.run();
@@ -131,6 +133,8 @@ public class RemoteControl extends OpMode {
       blDrive.setPower(-gamepad1.right_stick_x*.6 * speed);
       brDrive.setPower(gamepad1.right_stick_x*.6 * speed);
     }
+
+    telemetry.update();
   }
 
   public void motorInit(DcMotor m){
