@@ -36,10 +36,10 @@ public class RedInnerPath extends OpMode {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
 
-    drive1 = new DriveInstruction(hardwareMap, 1.13712 * SQUARE, 270);
-    drive2 = new DriveInstruction(hardwareMap, .65      * SQUARE, 180);
-    drive3 = new DriveInstruction(hardwareMap, 0.36789 * SQUARE, 180);
-    drive4 = new DriveInstruction(hardwareMap, 0.33445 * SQUARE, 180);
+    drive1 = new DriveInstruction(hardwareMap, 1.15 * SQUARE, 270);
+    drive2 = new DriveInstruction(hardwareMap, 0.75     * SQUARE, 180);
+    drive3 = new DriveInstruction(hardwareMap, 0.6 * SQUARE, 180);
+    drive4 = new DriveInstruction(hardwareMap, 0.6 * SQUARE, 180);
     drive5 = new DriveInstruction(hardwareMap, 0.2     * SQUARE, 90);
 
     turn1 = new TurnInstruction(hardwareMap, 180);
@@ -134,6 +134,8 @@ public class RedInnerPath extends OpMode {
           drive6 = new DriveInstruction(hardwareMap, 0);
           q = -1;
         }
+        q++;
+        break;
 
       case 11: // move the variable distance
       if (drive6.act()) {

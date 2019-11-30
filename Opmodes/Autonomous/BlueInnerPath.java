@@ -35,7 +35,7 @@ public class BlueInnerPath extends OpMode {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
 
-    drive1 = new DriveInstruction(hardwareMap, 1.13712 * SQUARE, 90);
+    drive1 = new DriveInstruction(hardwareMap, 3 * SQUARE, 0);
     drive2 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 0);
     drive3 = new DriveInstruction(hardwareMap, 0.36789 * SQUARE, 0);
     drive4 = new DriveInstruction(hardwareMap, 0.33445 * SQUARE, 0);
@@ -46,7 +46,7 @@ public class BlueInnerPath extends OpMode {
     drive9 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 90);
     drive10 = new DriveInstruction(hardwareMap, 3.0    * SQUARE, 180);
 
-    turn1 = new TurnInstruction(hardwareMap, 90);
+    turn1 = new TurnInstruction(hardwareMap, 720);
 
     wait1 = new WaitInstruction(hardwareMap, 2);
 
@@ -58,7 +58,10 @@ public class BlueInnerPath extends OpMode {
   }
 
   public void loop() {
-    switch(q){
+    turn1.act();
+    telemetry.addData("fr power", turn1.give());
+    telemetry.update();
+    /*switch(q){
       case 0: // move forward
         if (drive1.act()) {
           q++;
@@ -181,7 +184,7 @@ public class BlueInnerPath extends OpMode {
           q++;
         }
         break;
-    }
+    }*/
   }
 
   public double averageColor(){
