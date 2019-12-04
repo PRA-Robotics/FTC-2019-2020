@@ -36,7 +36,7 @@ public class RedInnerPath extends OpMode {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
 
-    drive1 = new DriveInstruction(hardwareMap, 1.15 * SQUARE, 270);
+    drive1 = new DriveInstruction(hardwareMap, 1.2 * SQUARE, 270);
     drive2 = new DriveInstruction(hardwareMap, 0.75     * SQUARE, 180);
     drive3 = new DriveInstruction(hardwareMap, 0.6 * SQUARE, 180);
     drive4 = new DriveInstruction(hardwareMap, 0.6 * SQUARE, 180);
@@ -45,7 +45,7 @@ public class RedInnerPath extends OpMode {
     turn1 = new TurnInstruction(hardwareMap, 180);
 
     drive7 = new DriveInstruction(hardwareMap, .5     * SQUARE, 90);
-    drive8 = new DriveInstruction(hardwareMap, .75     * SQUARE);
+    drive8 = new DriveInstruction(hardwareMap, 1.5     * SQUARE);
     drive9 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 270);
     drive10 = new DriveInstruction(hardwareMap, 3.0    * SQUARE, 180);
 
@@ -123,9 +123,9 @@ public class RedInnerPath extends OpMode {
 
       case 10:
         if (SkystoneNum == 0) {
-          drive6 = new DriveInstruction(hardwareMap, 1.3 * SQUARE);
-          turn1 = new TurnInstruction(hardwareMap, 135);
-          drive7 = new DriveInstruction(hardwareMap, 135);
+          drive6 = new DriveInstruction(hardwareMap, 1.5 * SQUARE);
+          turn1 = new TurnInstruction(hardwareMap, 245);
+          drive7 = new DriveInstruction(hardwareMap, .5 * SQUARE, 45);
         } else if (SkystoneNum == 1) {
           drive6 = new DriveInstruction(hardwareMap, 0.8 * SQUARE);
         } else if (SkystoneNum == 2) {
@@ -162,11 +162,11 @@ public class RedInnerPath extends OpMode {
         }
         break;
 
-      case 15: // stop intake, get outtake in position
+      /*case 15: // stop intake, get outtake in position
         in.stop();
         out.close();
         q++;
-        break;
+        break;*/
 
       case 16: // move back to switch over
         if (drive9.act()) {

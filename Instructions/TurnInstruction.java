@@ -7,7 +7,7 @@ public class TurnInstruction extends Instruction {
 
   public TurnInstruction(HardwareMap hw, double angle){ // 19.75 in
     super(hw);
-    double correctionFactor = 90.0/225 * (90/(88.75)) * (720.0/700);
+    double correctionFactor = 90.0/225 * (90/(88.75)) * (720.0/700)*(1070.0/1080);
     flFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
     frFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
     blFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
@@ -34,7 +34,6 @@ public class TurnInstruction extends Instruction {
   }
 
   private void end(){
-
     while(isCloseEnough(blDrive) && isCloseEnough(brDrive) && isCloseEnough(flDrive) && isCloseEnough(frDrive)){
       runTo(flDrive, (int)flPosition);
       runTo(frDrive, (int)frPosition);
