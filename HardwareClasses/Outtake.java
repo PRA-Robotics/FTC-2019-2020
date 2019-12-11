@@ -19,14 +19,12 @@ public class Outtake {
     ORDrive = hw.get(CRServo.class, "ORD");
 
     outDrive = hw.get(DcMotor.class, "outDrive");
-    outDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    outDrive.setTargetPosition(0);
-    outDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    outDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
   }
 
   public void close() {
-    outLeft.setPosition(0);
-    outRight.setPosition(0.82);
+    outLeft.setPosition(0.0);
+    outRight.setPosition(0.85);
   }
 
   public void open() {
@@ -34,9 +32,16 @@ public class Outtake {
     outRight.setPosition(.4);
   }
 
-  public void runToPosition(int newPos) {
-    outDrive.setTargetPosition(newPos);
-    outDrive.setPower(1);
+  public void runMotorWithPower(double newPow) {
+    outDrive.setPower(newPow);
+  }
+
+  public void elevate() {
+    runMotorWithPower(1);
+  }
+
+  public void lower() {
+    runMotorWithPower(-1);
   }
 
   public void runWheelsIn() {

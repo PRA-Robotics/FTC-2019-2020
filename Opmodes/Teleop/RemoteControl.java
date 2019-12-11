@@ -97,10 +97,10 @@ public class RemoteControl extends OpMode {
       delay2 = 0;
     }
 
-    if (gamepad1.dpad_up) {
-      out.runToPosition(outPosition + 50);
-    } else if (gamepad1.dpad_down) {
-      out.runToPosition(outPosition - 50);
+    if (gamepad2.dpad_up) {
+      out.elevate();
+    } else if (gamepad2.dpad_down) {
+      out.lower();
     } else {
       out.stopMotor();
     }

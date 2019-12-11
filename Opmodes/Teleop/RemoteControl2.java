@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.*;
 /**
  * @author Jackson and Tyler
  */
-@TeleOp(name="1 Contoller", group="TeleOp")
+/*@TeleOp(name="1 Contoller", group="TeleOp")
 public class RemoteControl2 extends OpMode {
 
   public DcMotor flDrive;
@@ -95,15 +95,6 @@ public class RemoteControl2 extends OpMode {
       delay2 = 0;
     }
 
-    if (gamepad1.dpad_up) {
-      out.runToPosition(outPosition + 50);
-    } else if (gamepad1.dpad_down) {
-      out.runToPosition(outPosition - 50);
-    } else {
-      out.stopMotor();
-    }
-    outPosition = out.getPosition();
-
     if (gamepad1.y) {
       out.runWheelsOut();
     } else if (gamepad1.a) {
@@ -141,3 +132,4 @@ public class RemoteControl2 extends OpMode {
     m.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
   }
 }
+*/
