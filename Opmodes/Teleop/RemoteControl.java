@@ -22,7 +22,7 @@ public class RemoteControl extends OpMode {
   boolean OutIsClosed = false;
   boolean outToggle = false;
   boolean clawIsDown;
-  boolean lastBState = false;
+  boolean lastYState = false;
   boolean open = false;
   int delay = 0;
   int delay2 = 0;
@@ -30,7 +30,7 @@ public class RemoteControl extends OpMode {
   public Intake in;
   public Outtake out;
   public MiddlePassage mid;
-  public Claw claw;
+  public Claws claws;
 
   public void init(){
     flDrive = hardwareMap.get(DcMotor.class, "flDrive");
@@ -58,7 +58,7 @@ public class RemoteControl extends OpMode {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
     mid = new MiddlePassage(hardwareMap);
-    claw = new Claw(hardwareMap);
+    claws = new Claws(hardwareMap);
 
     outPosition = out.getPosition();
   }
@@ -89,12 +89,12 @@ public class RemoteControl extends OpMode {
       speed = 1;
     }
 
-    if (gamepad2.right_bumper && delay2 > 25) {
+    if (gamepad2.right_bumper && delay2 > 35) {
       if (clawIsDown) {
-        claw.reset();
+        claws.reset();
         clawIsDown = false;
       } else {
-        claw.down();
+        claws.down();
         clawIsDown = true;
       }
       delay2 = 0;
@@ -117,7 +117,7 @@ public class RemoteControl extends OpMode {
       out.stopWheels();
     }
 
-    if (gamepad2.b && !lastBState) {
+    if (gamepad2.y && !lastYState) {
       OutIsClosed = !OutIsClosed;
     }
       //outToggle = true;
@@ -140,7 +140,7 @@ public class RemoteControl extends OpMode {
     }
 
     telemetry.update();
-    lastBState = gamepad2.b;
+    lastYState = gamepad2.y;
   }
 
   public void motorInit(DcMotor m){

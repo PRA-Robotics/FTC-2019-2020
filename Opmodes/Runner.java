@@ -6,14 +6,14 @@ public class Runner /*extends OpMode*/ {
   public Outtake out;
   public Color c;
   public MiddlePassage mid;
-  public Claw claw;
+  public Claws claws;
 
   public Runner(HardwareMap hw) {
     in = new Intake(hw);
     out = new Outtake(hw);
     c = new Color(hw);
     mid = new MiddlePassage(hw);
-    claw = new Claw(hw);
+    claws = new Claws(hw);
   }
 
   public double averageColor(){

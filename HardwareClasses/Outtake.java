@@ -24,7 +24,7 @@ public class Outtake {
 
   public void close() {
     outLeft.setPosition(0.0);
-    outRight.setPosition(0.85);
+    outRight.setPosition(0.9);
   }
 
   public void open() {
