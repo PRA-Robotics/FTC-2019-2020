@@ -10,7 +10,7 @@ public class DriveInstruction extends Instruction{
 
   public DriveInstruction(HardwareMap hw, double distance, double angle){
     super(hw);
-    double correctionFactor = 100/236.5;
+    double correctionFactor = 100.0/236.7 * 59.8/57.0;
     angle = Math.toRadians(angle);
     flFinal = correctionFactor * 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
     frFinal = correctionFactor * 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);

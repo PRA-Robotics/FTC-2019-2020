@@ -21,7 +21,7 @@ public class Forward extends OpMode {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
 
-    drive1 = new DriveInstruction(hardwareMap, 0.5 * SQUARE, 0);
+    drive1 = new DriveInstruction(hardwareMap, 1 * SQUARE, 0);
 
     c = new Color(hardwareMap);
     SkystoneNum = -1;
