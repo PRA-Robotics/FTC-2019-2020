@@ -12,14 +12,30 @@ public class Outtake {
   private Servo outRight;
   private CRServo ORDrive;
 
+  private Servo Lclamp;
+  private Servo Rclamp;
+
   public Outtake(HardwareMap hw) {
     outLeft = hw.get(Servo.class, "OL");
     outRight = hw.get(Servo.class, "OR");
     OLDrive = hw.get(CRServo.class, "OLD");
     ORDrive = hw.get(CRServo.class, "ORD");
 
+    Lclamp = hw.get(Servo.class, "leftClamp");
+    Rclamp = hw.get(Servo.class, "rightClamp");
+
     outDrive = hw.get(DcMotor.class, "outDrive");
     outDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+  }
+
+  public void clampDown() {
+    Lclamp.setPosition(1);
+    Rclamp.setPosition(0.15);
+  }
+
+  public void clampOut() {
+    Lclamp.setPosition(.35);
+    Rclamp.setPosition(.95);
   }
 
   public void close() {

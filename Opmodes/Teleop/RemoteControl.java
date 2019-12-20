@@ -72,13 +72,22 @@ public class RemoteControl extends OpMode {
       brDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
       telemetry.addData("flpower", spd);
     }
-    if (gamepad1.right_bumper) {
-      in.run();
+
+    if (gamepad1.right_bumper || gamepad2.right_trigger > .1) {
+      if (gamepad1.right_bumper) {
+        in.run();
+      } else {
+        in.stop();
+      }
       mid.runMotor();
-    }else if(gamepad1.left_bumper){
-      in.reverse();
+    } else if (gamepad1.left_bumper || gamepad2.left_trigger > .1) {
+      if (gamepad1.left_bumper) {
+        in.reverse();
+      } else {
+        in.stop();
+      }
       mid.runMotorBack();
-    }else{
+    } else {
       in.stop();
       mid.stop();
     }
@@ -89,7 +98,7 @@ public class RemoteControl extends OpMode {
       speed = 1;
     }
 
-    if (gamepad2.right_bumper && delay2 > 35) {
+    if (gamepad2.left_bumper && delay2 > 35) {
       if (clawIsDown) {
         claws.reset();
         clawIsDown = false;
@@ -99,6 +108,14 @@ public class RemoteControl extends OpMode {
       }
       delay2 = 0;
     }
+
+    if (gamepad2.right_bumper) {
+      out.clampDown();
+    } else {
+      out.clampOut();
+    }
+
+    telemetry.addData("PLZ NO I JUS CHILD", "no");
 
     if (gamepad2.dpad_up) {
       out.elevate();
@@ -138,7 +155,6 @@ public class RemoteControl extends OpMode {
       blDrive.setPower(-gamepad1.right_stick_x*.6 * speed);
       brDrive.setPower(gamepad1.right_stick_x*.6 * speed);
     }
-
     telemetry.update();
     lastYState = gamepad2.y;
   }

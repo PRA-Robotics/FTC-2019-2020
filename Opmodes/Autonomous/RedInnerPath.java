@@ -61,7 +61,7 @@ public class RedInnerPath extends OpMode {
   }
 
   public void loop() {
-
+    
     switch(q){
       case 1: // move forward
         if (drive1.act()) {
