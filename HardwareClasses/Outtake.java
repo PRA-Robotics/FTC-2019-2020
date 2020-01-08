@@ -40,12 +40,12 @@ public class Outtake {
 
   public void close() {
     outLeft.setPosition(0.0);
-    outRight.setPosition(0.9);
+    outRight.setPosition(1);
   }
 
   public void open() {
-    outLeft.setPosition(.4);
-    outRight.setPosition(.4);
+    outLeft.setPosition(1);
+    outRight.setPosition(0);
   }
 
   public void runMotorWithPower(double newPow) {

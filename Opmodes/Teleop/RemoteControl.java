@@ -23,6 +23,7 @@ public class RemoteControl extends OpMode {
   boolean outToggle = false;
   boolean clawIsDown;
   boolean lastYState = false;
+  boolean lastAState = false;
   boolean open = false;
   int delay = 0;
   int delay2 = 0;
@@ -98,24 +99,13 @@ public class RemoteControl extends OpMode {
       speed = 1;
     }
 
-    if (gamepad2.left_bumper && delay2 > 35) {
-      if (clawIsDown) {
-        claws.reset();
-        clawIsDown = false;
-      } else {
-        claws.down();
-        clawIsDown = true;
-      }
-      delay2 = 0;
-    }
+
 
     if (gamepad2.right_bumper) {
       out.clampDown();
     } else {
       out.clampOut();
     }
-
-    telemetry.addData("PLZ NO I JUS CHILD", "no");
 
     if (gamepad2.dpad_up) {
       out.elevate();
@@ -143,9 +133,16 @@ public class RemoteControl extends OpMode {
     } else {
       out.open();
     }
-    /* else {
-      outToggle = false;
-    }*/
+
+    if (gamepad1.x && !lastAState) {
+      clawIsDown = !clawIsDown;
+    }
+
+    if (!clawIsDown) {
+      claws.down();
+    } else {
+      claws.reset();
+    }
     delay ++;
     delay2++;
 
@@ -157,6 +154,7 @@ public class RemoteControl extends OpMode {
     }
     telemetry.update();
     lastYState = gamepad2.y;
+    lastAState = gamepad1.x;
   }
 
   public void motorInit(DcMotor m){
