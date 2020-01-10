@@ -30,7 +30,7 @@ public class Outtake {
 
   public void clampDown() {
     Lclamp.setPosition(1);
-    Rclamp.setPosition(0.15);
+    Rclamp.setPosition(0.1);
   }
 
   public void clampOut() {
@@ -39,8 +39,8 @@ public class Outtake {
   }
 
   public void close() {
-    outLeft.setPosition(0.0);
-    outRight.setPosition(1);
+    outLeft.setPosition(0.05);
+    outRight.setPosition(0.9);
   }
 
   public void open() {
