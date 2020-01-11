@@ -8,11 +8,7 @@ public class TurnInstruction extends Instruction {
 
   public TurnInstruction(HardwareMap hw, double angle){ // 19.75 in
     super(hw);
-    if(angle < 0){
-      isNegative = true;
-      angle *= -1;
-    }
-    double correctionFactor = (90.0/225.0) * (90/(88.75)) * (720.0/700)*(1070.0/1080) * (1080.0/1077.0) * (2160.0/2165.0) * (360.0/355.0) * (360.0/362.0) * (180.0/170.0) * (180.0/178.0);
+    double correctionFactor = (360.0/830.0);
     flFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
     frFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
     blFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
@@ -32,14 +28,14 @@ public class TurnInstruction extends Instruction {
   }
 
   private boolean isCloseEnough(DcMotor m){
-    if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 100){
+    if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 200){
       return true;
     }
-    return false;
+    return true;
   }
 
   private void end(){
-    while(isCloseEnough(blDrive) && isCloseEnough(brDrive) && isCloseEnough(flDrive) && isCloseEnough(frDrive)){
+    while(!(isCloseEnough(blDrive) && isCloseEnough(brDrive) && isCloseEnough(flDrive) && isCloseEnough(frDrive))){
       runTo(flDrive, (int)flPosition);
       runTo(frDrive, (int)frPosition);
       runTo(blDrive, (int)blPosition);
@@ -81,6 +77,6 @@ public class TurnInstruction extends Instruction {
   }
 
   public double give(){
-    return frDrive.getCurrentPosition();
+    return brDrive.getCurrentPosition();
   }
 }

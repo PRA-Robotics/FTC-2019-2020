@@ -47,6 +47,10 @@ public class DriveInstruction extends Instruction{
       b ++;
     }
     isDone = true;
+    flDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    frDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    blDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    brDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
   }
 
   @Override

@@ -12,6 +12,7 @@ public class Turn extends OpMode {
     out = new Outtake(hardwareMap);
     turn1 = new TurnInstruction(hardwareMap, 2*180);
 
+
     q = 0; // add a multiplier to the speed on turn
     // get rid of req for stop within certain error
   }
@@ -25,5 +26,7 @@ public class Turn extends OpMode {
         }
         break;
     }
+    telemetry.addData("frontRight", turn1.give());
+    telemetry.update();
   }
 }
