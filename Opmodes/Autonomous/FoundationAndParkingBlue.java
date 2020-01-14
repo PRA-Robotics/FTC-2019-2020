@@ -2,8 +2,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.*;
 
-@Autonomous(name = "Red Foundation and Parking", group = "Autonomous")
-public class FoundationAndParkingRed extends OpMode {
+@Autonomous(name = "Blue Foundation and Parking", group = "Autonomous")
+public class FoundationAndParkingBlue extends OpMode {
   Intake in;
   Outtake out;
   Claws claws;
@@ -29,16 +29,14 @@ public class FoundationAndParkingRed extends OpMode {
     out = new Outtake(hardwareMap);
     claws = new Claws(hardwareMap);
 
-    drive1 = new DriveInstruction(hardwareMap, 1.53 * SQUARE, 290);
+    drive1 = new DriveInstruction(hardwareMap, 1.53 * SQUARE, 250);
     wait1 = new WaitInstruction(hardwareMap, 1.5);
     drive2 = new DriveInstruction(hardwareMap, 1.5 * SQUARE, 90);
-    turn1 = new TurnInstruction(hardwareMap, 180);
+    turn1 = new TurnInstruction(hardwareMap, -185);
     //wait1 = new WaitInstruction(hardwareMap, 1.5);
-    drive3 = new DriveInstruction(hardwareMap, 1.85 * SQUARE, 135);
-    turn2 = new TurnInstruction(hardwareMap, 45);
-    drive4 = new DriveInstruction(hardwareMap, .4 * SQUARE, 180);
-
-    //q = 10;
+    drive3 = new DriveInstruction(hardwareMap, 1.85 * SQUARE, 90);
+    turn2 = new TurnInstruction(hardwareMap, 30);
+    drive4 = new DriveInstruction(hardwareMap, 1 * SQUARE);
   }
 
   public void loop() {

@@ -10,7 +10,7 @@ public class Turn extends OpMode {
 
   public void init() {
     out = new Outtake(hardwareMap);
-    turn1 = new TurnInstruction(hardwareMap, 2*180);
+    turn1 = new TurnInstruction(hardwareMap, -360);
 
 
     q = 0; // add a multiplier to the speed on turn

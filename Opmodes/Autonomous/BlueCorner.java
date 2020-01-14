@@ -23,7 +23,7 @@ public class BlueCorner extends OpMode {
     out = new Outtake(hardwareMap);
 
     drive1 = new DriveInstruction(hardwareMap, 1 * SQUARE, 90);
-    drive2 = new DriveInstruction(hardwareMap, 0.5 * SQUARE, 0);
+    drive2 = new DriveInstruction(hardwareMap, 1 * SQUARE);
 
     c = new Color(hardwareMap);
     SkystoneNum = -1;
@@ -37,6 +37,10 @@ public class BlueCorner extends OpMode {
           q++;
         }
         break;
+      case 1:
+        if (drive2.act()) {
+          q++;
+        }
     }
   }
 }

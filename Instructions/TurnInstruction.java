@@ -4,16 +4,20 @@ public class TurnInstruction extends Instruction {
   static final double INC_PER_THETA = .4;
   static final double CIRCUMFERENCE = .1256637;
   static final double RADIUS = 0.250825;
+  static double direction = 1.0;
   boolean isNegative = false;
 
   public TurnInstruction(HardwareMap hw, double angle){ // 19.75 in
     super(hw);
+    if (angle < 0) {
+      direction = -1.0;
+    }
     double correctionFactor = (360.0/830.0);
     flFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
     frFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
     blFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
     brFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
-    increments = (int) (angle * INC_PER_THETA);
+    increments = (int) (direction * angle * INC_PER_THETA);
     flDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     frDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     blDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
