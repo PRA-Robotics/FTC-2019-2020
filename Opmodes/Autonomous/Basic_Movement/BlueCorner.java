@@ -4,29 +4,18 @@ import com.qualcomm.robotcore.hardware.*;
 
 @Autonomous(name = "Blue Corner", group = "Autonomous")
 public class BlueCorner extends OpMode {
-  Intake in;
-  Outtake out;
 
   final public double SQUARE = .598; // 59.8 cm
 
   DriveInstruction drive1;
   DriveInstruction drive2;
 
-  Color c;
-  double[] skystoneColor = new double[3];
-  int SkystoneNum;
-
   int q;
 
   public void init() {
-    in = new Intake(hardwareMap);
-    out = new Outtake(hardwareMap);
-
     drive1 = new DriveInstruction(hardwareMap, 1 * SQUARE, 90);
     drive2 = new DriveInstruction(hardwareMap, 1 * SQUARE);
 
-    c = new Color(hardwareMap);
-    SkystoneNum = -1;
     q = 0;
   }
 
@@ -37,10 +26,12 @@ public class BlueCorner extends OpMode {
           q++;
         }
         break;
+
       case 1:
         if (drive2.act()) {
           q++;
         }
+        break;
     }
   }
 }
