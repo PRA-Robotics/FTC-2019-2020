@@ -54,7 +54,6 @@ public class RemoteControl extends OpMode {
 
     blDrive.setDirection(DcMotor.Direction.REVERSE);
     flDrive.setDirection(DcMotor.Direction.REVERSE);
-    irDrive.setDirection(DcMotor.Direction.REVERSE);
 
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);

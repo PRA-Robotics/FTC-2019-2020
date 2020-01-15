@@ -19,12 +19,12 @@ public class Intake {
 
   public void run() {
     IntakeLeft.setPower(power);
-    IntakeRight.setPower(power);
+    IntakeRight.setPower(-power);
   }
 
   public void reverse(){
     IntakeLeft.setPower(-power);
-    IntakeRight.setPower(-power);
+    IntakeRight.setPower(power);
   }
 
   public void stop(){
