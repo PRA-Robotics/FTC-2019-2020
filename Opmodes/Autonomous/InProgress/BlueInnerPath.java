@@ -22,8 +22,10 @@ public class BlueInnerPath extends OpMode {
   DriveInstruction drive11;
 
   TurnInstruction turn1;
+  TurnInstruction turn2;
 
   WaitInstruction wait1;
+  WaitInstruction wait2;
 
   Color c;
   double[] skystoneColor = new double[3];
@@ -37,13 +39,28 @@ public class BlueInnerPath extends OpMode {
 
     drive1 = new DriveInstruction(hardwareMap, 1.1 * SQUARE, 270);
 
-    wait1 = new WaitInstruction(hardwareMap, .3);
+    turn1 = new TurnInstruction(hardwareMap, -55);
 
-    drive2 = new DriveInstruction(hardwareMap, .6 * SQUARE, 170);
-    drive3 = new DriveInstruction(hardwareMap, .6 * SQUARE, 170);
+    wait1 = new WaitInstruction(hardwareMap, .4);//Wait for color sensing
+    wait2 = new WaitInstruction(hardwareMap, 1.2);//Wait for intake
 
-    drive4 = new DriveInstruction(hardwareMap, .71 * SQUARE, 270);
-    drive5 = new DriveInstruction(hardwareMap, .9 * SQUARE, 0, 0.33);
+    drive2 = new DriveInstruction(hardwareMap, .58 * SQUARE, 170);//Left at start
+    drive3 = new DriveInstruction(hardwareMap, .66 * SQUARE, 170);//Second left at start
+
+    drive4 = new DriveInstruction(hardwareMap, .62 * SQUARE, 270);//Sideways before intake
+    drive5 = new DriveInstruction(hardwareMap, .72 * SQUARE, 0, 0.4);//Forwards for intake
+    drive6 = new DriveInstruction(hardwareMap, 1 * SQUARE, 90);//Coming out after intake
+
+    drive7 = new DriveInstruction(hardwareMap, 0.6 * SQUARE, 0);//Sideways if skystone is 0
+
+    drive8 = new DriveInstruction(hardwareMap, 0.38 * SQUARE, 270);
+    drive9 = new DriveInstruction(hardwareMap, 0.9 * SQUARE, 0, 0.4);
+
+    drive10 = new DriveInstruction(hardwareMap, 1 * SQUARE, 90);
+    turn2 = new TurnInstruction(hardwareMap, -60);
+
+    drive11 = new DriveInstruction(hardwareMap, 3 * SQUARE, 270);
+
 
     c = new Color(hardwareMap);
     q = 0;
@@ -94,11 +111,13 @@ public class BlueInnerPath extends OpMode {
       case 6:
         if (skystoneColor[0] < skystoneColor[1] && skystoneColor[0] < skystoneColor[2]) {
           skystoneNum = 0;
+          q = 15;
         } else if (skystoneColor[1] < skystoneColor[0] && skystoneColor[1] < skystoneColor[2]) {
           skystoneNum = 1;
           q++;
         } else if (skystoneColor[2] < skystoneColor[0] && skystoneColor[2] < skystoneColor[1]) {
           skystoneNum = 2;
+          q = 16;
         }
 
         break;
@@ -115,19 +134,81 @@ public class BlueInnerPath extends OpMode {
           q++;
         }
         break;
+
+      case 9:
+        if(wait2.act()){
+          q ++;
+        }
+        break;
+
+      case 10:
+        in.stop();
+        if(drive6.act()){
+          q++;
+        }
+        break;
+
+      case 15:
+        if(drive7.act()){
+          q = 7;
+        }
+        break;
+
+      case 16:
+        if(turn1.act()){
+          q ++;
+        }
+        break;
+
+      case 17:
+        if(drive8.act()){
+          q ++;
+        }
+        break;
+
+      case 18:
+        in.run();
+        if(drive9.act()){
+          q ++;
+        }
+        break;
+
+      case 19:
+        if(wait2.act()){
+          q ++;
+        }
+        break;
+
+      case 20:
+        if(drive10.act()){
+          q ++;
+        }
+        break;
+
+      case 21:
+        in.stop();
+        if(turn2.act()){
+          q ++;
+        }
+        break;
+
+      case 22:
+        if(drive11.act()){
+          q ++;
+        }
+        break;
     }
-    telemetry.addData("Block", skystoneNum);
-    /*telemetry.addData("Block0", skystoneColor[0]);
+    telemetry.addData("Block0", skystoneColor[0]);
     telemetry.addData("Block1", skystoneColor[1]);
-    telemetry.addData("Block2", skystoneColor[2]);*/
+    telemetry.addData("Block2", skystoneColor[2]);
     telemetry.update();
   }
 
   public double averageColor(){
     double sum = 0;
-    for(int i = 0; i < 10; i ++){
+    for(int i = 0; i < 1; i ++){
       sum += c.getRed();
     }
-    return sum / 10;
+    return sum / 1;
   }
 }

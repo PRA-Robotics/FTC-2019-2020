@@ -16,4 +16,15 @@ public class Color{
     float max = Math.max(Math.max(Math.max(colors.red, colors.green), colors.blue), colors.alpha);
     return (double) colors.red / max;
   }
+
+  public double getBlue(){
+    colors = colorSensor.getNormalizedColors();
+    float max = Math.max(Math.max(Math.max(colors.red, colors.green), colors.blue), colors.alpha);
+    return (double) colors.blue / max;
+  }
+    public double getGreen(){
+      colors = colorSensor.getNormalizedColors();
+      float max = Math.max(Math.max(Math.max(colors.red, colors.green), colors.blue), colors.alpha);
+      return (double) colors.green / max;
+  }
 }

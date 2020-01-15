@@ -32,8 +32,10 @@ public class RemoteControl extends OpMode {
   public Outtake out;
   public MiddlePassage mid;
   public Claws claws;
+  public Color c;
 
   public void init(){
+    c = new Color(hardwareMap);
     flDrive = hardwareMap.get(DcMotor.class, "flDrive");
     frDrive = hardwareMap.get(DcMotor.class, "frDrive");
     blDrive = hardwareMap.get(DcMotor.class, "blDrive");
@@ -151,6 +153,9 @@ public class RemoteControl extends OpMode {
       blDrive.setPower(-gamepad1.right_stick_x*.6 * speed);
       brDrive.setPower(gamepad1.right_stick_x*.6 * speed);
     }
+    telemetry.addData("red", c.getRed());
+    telemetry.addData("blue", c.getBlue());
+    telemetry.addData("green", c.getGreen());
     telemetry.update();
     lastYState = gamepad2.y;
     lastAState = gamepad1.x;
