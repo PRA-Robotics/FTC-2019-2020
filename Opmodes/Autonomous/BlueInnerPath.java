@@ -27,7 +27,7 @@ public class BlueInnerPath extends OpMode {
 
   Color c;
   double[] skystoneColor = new double[3];
-  int SkystoneNum;
+  int skystoneNum = -1;
 
   int q;
 
@@ -35,156 +35,92 @@ public class BlueInnerPath extends OpMode {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
 
-    drive1 = new DriveInstruction(hardwareMap, 3 * SQUARE, 0);
-    drive2 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 0);
-    drive3 = new DriveInstruction(hardwareMap, 0.36789 * SQUARE, 0);
-    drive4 = new DriveInstruction(hardwareMap, 0.33445 * SQUARE, 0);
-    drive5 = new DriveInstruction(hardwareMap, 0.5     * SQUARE, 270);
+    drive1 = new DriveInstruction(hardwareMap, 1.1 * SQUARE, 270);
 
-    drive7 = new DriveInstruction(hardwareMap, .75     * SQUARE, 225);
-    drive8 = new DriveInstruction(hardwareMap, .25     * SQUARE, 0);
-    drive9 = new DriveInstruction(hardwareMap, 1.0     * SQUARE, 90);
-    drive10 = new DriveInstruction(hardwareMap, 3.0    * SQUARE, 180);
+    wait1 = new WaitInstruction(hardwareMap, .3);
 
-    turn1 = new TurnInstruction(hardwareMap, 720);
+    drive2 = new DriveInstruction(hardwareMap, .6 * SQUARE, 170);
+    drive3 = new DriveInstruction(hardwareMap, .6 * SQUARE, 170);
 
-    wait1 = new WaitInstruction(hardwareMap, 2);
-
-    drive11 = new DriveInstruction(hardwareMap, 2.0    * SQUARE, 270);
+    drive4 = new DriveInstruction(hardwareMap, .71 * SQUARE, 270);
+    drive5 = new DriveInstruction(hardwareMap, .9 * SQUARE, 0, 0.33);
 
     c = new Color(hardwareMap);
-    SkystoneNum = -1;
     q = 0;
   }
 
   public void loop() {
-    turn1.act();
-    telemetry.addData("fr power", turn1.give());
-    telemetry.update();
-    /*switch(q){
+    telemetry.addData("q:", q);
+    switch(q){
       case 0: // move forward
         if (drive1.act()) {
           q++;
         }
         break;
 
-      case 1: // move left to start checking stones
+      case 1:
+        if(wait1.act()){
+          skystoneColor[0] = averageColor();
+          q++;
+        }
+        break;
+
+      case 2: // move left to start checking stones
         if(drive2.act()) {
           q++;
         }
         break;
 
-      case 2: // check first stone
-        skystoneColor[0] = averageColor();
-        q++;
-        break;
-
-      case 3: // move left
-        if(drive3.act()) {
+      case 3:
+        if(wait1.act()){
+          skystoneColor[1] = averageColor();
           q++;
         }
         break;
 
-      case 4: // check second stone
-        skystoneColor[1] = averageColor();
-        q++;
-        break;
-
-      case 5: // move left
-        if(drive4.act()) {
+      case 4: // check first stone
+        if (drive3.act()) {
           q++;
         }
         break;
 
-      case 6: // check third stone
-        skystoneColor[2] = averageColor();
-        q++;
+      case 5:
+        if(wait1.act()){
+          skystoneColor[2] = averageColor();
+          q++;
+        }
         break;
 
-      case 7: // sets drive6 to a variable distance depending on which stone is skystone
+      case 6:
         if (skystoneColor[0] < skystoneColor[1] && skystoneColor[0] < skystoneColor[2]) {
-          SkystoneNum = 0;
-          drive6 = new DriveInstruction(hardwareMap, 0.70234 * SQUARE, 0);
+          skystoneNum = 0;
         } else if (skystoneColor[1] < skystoneColor[0] && skystoneColor[1] < skystoneColor[2]) {
-          SkystoneNum = 1;
-          drive6 = new DriveInstruction(hardwareMap, 0.33445 * SQUARE, 0);
+          skystoneNum = 1;
+          q++;
         } else if (skystoneColor[2] < skystoneColor[0] && skystoneColor[2] < skystoneColor[1]) {
-          SkystoneNum = 2;
-          drive6 = new DriveInstruction(hardwareMap, 0 * SQUARE, 0);
-        } else {
-          SkystoneNum = -1;
+          skystoneNum = 2;
         }
-        q++;
+
         break;
 
-      case 8: // back up
+      case 7:
+        if (drive4.act()) {
+          q++;
+        }
+        break;
+
+      case 8:
+      in.run();
         if (drive5.act()) {
           q++;
         }
         break;
-
-      case 9: // move the variable distance
-      if (drive6.act()) {
-        q++;
-      }
-      break;
-
-      case 10: // move to intercept skystone
-        if (drive7.act()) {
-          q++;
-        }
-        break;
-
-      case 11: // grab stone
-        in.run();
-        if (drive8.act()) {
-          q++;
-        }
-        break;
-
-      case 12: // stop intake, get outtake in position
-        in.stop();
-        out.close();
-        q++;
-        break;
-
-      case 13: // move back to switch over
-        if (drive9.act()) {
-          q++;
-        }
-        break;
-
-      case 14: // cross under bridge
-        if (drive10.act()) {
-          q++;
-        }
-        break;
-
-      case 15: // turn to be in position to push stone out
-        if (turn1.act()) {
-          q++;
-        }
-        break;
-
-      case 16: // push skystone out
-        out.runWheelsOut();
-        if (wait1.act()) {
-          q++;
-        }
-        break;
-
-      case 17: // stop wheels, open outtake to not hit anything while going back
-        out.stopWheels();
-        out.open();
-        q++;
-        break;
-
-      case 18: // move back under bridge
-        if (drive11.act()) {
-          q++;
-        }
-        break;
-    }*/
+    }
+    telemetry.addData("Block", skystoneNum);
+    telemetry.addData("Block0", skystoneColor[0]);
+    telemetry.addData("Block1", skystoneColor[1]);
+    telemetry.addData("Block2", skystoneColor[2]);
+    telemetry.update();
   }
 
   public double averageColor(){
