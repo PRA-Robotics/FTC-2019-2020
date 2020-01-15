@@ -3,6 +3,7 @@ import com.qualcomm.robotcore.hardware.*;
 public class DriveInstruction extends Instruction{
   static final int INC_PER_METER = 100;
   static final double CIRCUMFERENCE = .1256637;
+  double speed = 1;
 
   public DriveInstruction(HardwareMap hw, double distance) {
     this(hw, distance, 0);
@@ -23,6 +24,22 @@ public class DriveInstruction extends Instruction{
     brDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
   }
 
+  public DriveInstruction(HardwareMap hw, double distance, double angle, double s){
+    super(hw);
+    double correctionFactor = 100.0/236.7 * 59.8/57.0;
+    angle = Math.toRadians(angle);
+    flFinal = correctionFactor * 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
+    frFinal = correctionFactor * 560 * ((Math.sqrt(2) * distance / 2 * (Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);
+    blFinal = correctionFactor * 560 * ((Math.sqrt(2) * distance / 2 * (- Math.sin(angle) + Math.cos(angle))) / CIRCUMFERENCE);
+    brFinal = correctionFactor * 560 * ((Math.sqrt(2) * distance / 2 * (- Math.sin(angle) - Math.cos(angle))) / CIRCUMFERENCE);
+    increments = (int) (distance * INC_PER_METER / speed);
+    flDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    frDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    blDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    brDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+    speed = s;
+  }
+
   private void init(){
     flPosition = flDrive.getCurrentPosition();
     frPosition = frDrive.getCurrentPosition();
@@ -31,21 +48,24 @@ public class DriveInstruction extends Instruction{
   }
 
   private boolean isCloseEnough(DcMotor m){
-    if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 100){
-      return true;
+    if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 50){
+      return false;
     }
     return true;
   }
 
   private void end(){
-    int b = 0;
+    while(!(isCloseEnough(flDrive) && isCloseEnough(frDrive) && isCloseEnough(blDrive) && isCloseEnough(brDrive))){
+      speed = 0.4;
+      runTo(flDrive, (int)flPosition);
+      runTo(frDrive, (int)frPosition);
+      runTo(blDrive, (int)blPosition);
+      runTo(brDrive, (int)brPosition);
+    }
     flDrive.setPower(0);
     frDrive.setPower(0);
     blDrive.setPower(0);
     brDrive.setPower(0);
-    while(b < 50){
-      b ++;
-    }
     isDone = true;
     flDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     frDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -78,6 +98,6 @@ public class DriveInstruction extends Instruction{
 
   private void runTo(DcMotor m, int position){
     m.setTargetPosition(position);
-    m.setPower(1);
+    m.setPower(speed);
   }
 }

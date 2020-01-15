@@ -32,14 +32,18 @@ public class TurnInstruction extends Instruction {
   }
 
   private boolean isCloseEnough(DcMotor m){
-    if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 200){
-      return true;
+    if(Math.abs(m.getCurrentPosition() - m.getTargetPosition()) < 50){
+      return false;
     }
     return true;
   }
 
   private void end(){
-    while(!(isCloseEnough(blDrive) && isCloseEnough(brDrive) && isCloseEnough(flDrive) && isCloseEnough(frDrive))){
+    while(!(isCloseEnough(flDrive) && isCloseEnough(frDrive) && isCloseEnough(blDrive) && isCloseEnough(brDrive))){
+      flDrive.setPower(0.2);
+      frDrive.setPower(0.2);
+      blDrive.setPower(0.2);
+      brDrive.setPower(0.2);
       runTo(flDrive, (int)flPosition);
       runTo(frDrive, (int)frPosition);
       runTo(blDrive, (int)blPosition);
