@@ -117,9 +117,9 @@ public class BlueInnerPath extends OpMode {
         break;
     }
     telemetry.addData("Block", skystoneNum);
-    telemetry.addData("Block0", skystoneColor[0]);
+    /*telemetry.addData("Block0", skystoneColor[0]);
     telemetry.addData("Block1", skystoneColor[1]);
-    telemetry.addData("Block2", skystoneColor[2]);
+    telemetry.addData("Block2", skystoneColor[2]);*/
     telemetry.update();
   }
 
