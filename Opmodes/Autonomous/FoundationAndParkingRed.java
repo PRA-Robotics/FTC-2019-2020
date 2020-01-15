@@ -13,14 +13,13 @@ public class FoundationAndParkingRed extends OpMode {
   DriveInstruction drive1;
   DriveInstruction drive2;
   DriveInstruction drive3;
+  DriveInstruction drive4;
 
   WaitInstruction wait1;
   WaitInstruction wait2;
 
   TurnInstruction turn1;
-
   TurnInstruction turn2;
-  DriveInstruction drive4;
 
   int q = 0;
 
@@ -30,7 +29,7 @@ public class FoundationAndParkingRed extends OpMode {
     claws = new Claws(hardwareMap);
 
     drive1 = new DriveInstruction(hardwareMap, 1.53 * SQUARE, 290);
-    wait1 = new WaitInstruction(hardwareMap, 1.5);
+    wait1 = new WaitInstruction(hardwareMap, .75);
     drive2 = new DriveInstruction(hardwareMap, 1.5 * SQUARE, 90);
     turn1 = new TurnInstruction(hardwareMap, 180);
     //wait1 = new WaitInstruction(hardwareMap, 1.5);
