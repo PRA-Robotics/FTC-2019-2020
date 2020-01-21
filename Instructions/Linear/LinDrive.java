@@ -11,6 +11,6 @@ public class LinDrive {
   }
 
   public void run() {
-    while (drive.act()) {}
+    while (!drive.act()) {}
   }
 }

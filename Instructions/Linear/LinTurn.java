@@ -6,6 +6,6 @@ public class LinTurn {
   }
 
   public void run() {
-    while (turn.act()) {}
+    while (!turn.act()) {}
   }
 }

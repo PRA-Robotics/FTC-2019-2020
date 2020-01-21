@@ -6,6 +6,6 @@ public class Wait {
   }
 
   public void run() {
-    while (wait1.act()) {}
+    while (!wait1.act()) {}
   }
 }
