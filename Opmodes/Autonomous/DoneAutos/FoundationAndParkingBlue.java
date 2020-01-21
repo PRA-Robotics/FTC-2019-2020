@@ -16,7 +16,6 @@ public class FoundationAndParkingBlue extends OpMode {
   DriveInstruction drive4;
 
   WaitInstruction wait1;
-  WaitInstruction wait2;
 
   TurnInstruction turn1;
   TurnInstruction turn2;
@@ -32,7 +31,6 @@ public class FoundationAndParkingBlue extends OpMode {
     wait1 = new WaitInstruction(hardwareMap, .75);
     drive2 = new DriveInstruction(hardwareMap, 1.5 * SQUARE, 90);
     turn1 = new TurnInstruction(hardwareMap, -185);
-    //wait1 = new WaitInstruction(hardwareMap, 1.5);
     drive3 = new DriveInstruction(hardwareMap, 1.85 * SQUARE, 90);
     turn2 = new TurnInstruction(hardwareMap, 30);
     drive4 = new DriveInstruction(hardwareMap, 1 * SQUARE);

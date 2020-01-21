@@ -67,11 +67,26 @@ public class RemoteControl extends OpMode {
 
   public void loop(){
     if(Math.pow(gamepad1.left_stick_y, 2) + Math.pow(gamepad1.left_stick_x, 2) != 0){
-      double spd = speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 + gamepad1.right_stick_x);
-      flDrive.setPower(spd);
-      frDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
-      blDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 + Math.sqrt(2) * gamepad1.left_stick_x / 2)  * Math.min(1 , 1 + gamepad1.right_stick_x));
-      brDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
+      double spd = Math.sqrt(2) * gamepad1.left_stick_y / 2 -
+      Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 +
+      gamepad1.right_stick_x);
+
+      flDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 -
+      Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 +
+      gamepad1.right_stick_x));
+
+      frDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 +
+      Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 -
+      gamepad1.right_stick_x));
+
+      blDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 +
+      Math.sqrt(2) * gamepad1.left_stick_x / 2)  * Math.min(1 , 1 +
+      gamepad1.right_stick_x));
+
+      brDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 -
+      Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 -
+      gamepad1.right_stick_x));
+      
       telemetry.addData("flpower", spd);
     }
 
@@ -153,10 +168,8 @@ public class RemoteControl extends OpMode {
       blDrive.setPower(-gamepad1.right_stick_x*.6 * speed);
       brDrive.setPower(gamepad1.right_stick_x*.6 * speed);
     }
-    telemetry.addData("red", c.getRed());
-    telemetry.addData("blue", c.getBlue());
-    telemetry.addData("green", c.getGreen());
-    telemetry.update();
+    telemetry.addData("gamepad1.y", gamepad1.left_stick_y);
+    telemetry.addData("gamepad1.x", gamepad1.left_stick_x);
     lastYState = gamepad2.y;
     lastAState = gamepad1.x;
   }
