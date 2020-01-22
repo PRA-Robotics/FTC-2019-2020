@@ -1,11 +1,13 @@
 public class LinTurn {
   TurnInstruction turn;
 
+/*
   public LinTurn(HardwareMap hw, double angle) {
-    turn = new DriveInstruction(hw, angle);
+    turn = new TurnInstruction(hw, angle);
   }
-
-  public void run() {
+*/
+  public void run(HardwareMap hw, double angle) {
+    turn = new TurnInstruction(hw, angle);
     while (!turn.act()) {}
   }
 }

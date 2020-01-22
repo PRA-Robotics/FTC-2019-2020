@@ -8,40 +8,33 @@ public class FoundationAndParkingBlue extends LinearOpMode {
   Outtake out;
   Claws claws;
 
-  LinDrive drive1;
-  LinDrive drive2;
-  LinDrive drive3;
-  LinDrive drive4;
+  LinDrive drive;
 
-  LinTurn turn1;
-  LinTurn turn2;
+  LinTurn turn;
 
-  Wait wait1;
+  Wait wait;
 
   public void init() {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
     claws = new Claws(hardwareMap);
 
-    drive1 = new LinDrive(hardwareMap, 1.53, 250);
-    wait1 = new Wait(hardwareMap, .75);
-    drive2 = new LinDrive(hardwareMap, 1.5, 90);
-    turn1 = new LinTurn(hardwareMap, -185);
-    drive3 = new LinDrive(hardwareMap, 1.85, 90);
-    turn2 = new LinTurn(hardwareMap, 30);
-    drive4 = new LinDrive(hardwareMap, 1, 0);
+    drive = new LinDrive();
+    wait = new Wait();
+    turn = new LinTurn();
   }
 
+  @Override
   public void runOpMode() {
-    drive1.run();
+    drive.run(hardwareMap, 1.53, 250);
     claws.down();
-    wait1.run();
-    drive2.run();
-    turn1.run();
+    wait.run(hardwareMap, .75);
+    drive.run(hardwareMap, 1.5, 90);
+    turn.run(hardwareMap, -185);
     claws.reset();
-    wait1.run();
-    drive3.run();
-    turn2.run();
-    drive4.run();
+    wait.run(hardwareMap, .75);
+    drive.run(hardwareMap, 1.85, 90);
+    turn.run(hardwareMap, 30);
+    drive.run(hardwareMap, 1, 0);
   }
 }
