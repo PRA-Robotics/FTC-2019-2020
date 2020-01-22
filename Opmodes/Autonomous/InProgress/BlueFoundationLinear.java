@@ -28,11 +28,11 @@ public class BlueFoundationLinear extends LinearOpMode {
 
     drive.run(hardwareMap, 1.53, 250);
     claws.down();
-    wait.run(hardwareMap, .75);
+    wait.waitTime(.75);
     drive.run(hardwareMap, 1.5, 90);
     turn.run(hardwareMap, -185);
     claws.reset();
-    wait.run(hardwareMap, .75);
+    wait.waitTime(.75);
     drive.run(hardwareMap, 1.85, 90);
     turn.run(hardwareMap, 30);
     drive.run(hardwareMap, 1, 0);

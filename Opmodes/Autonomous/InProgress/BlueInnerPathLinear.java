@@ -35,15 +35,15 @@ public class BlueInnerPathLinear extends LinearOpMode {
     waitForStart();
 
     drive.run(hardwareMap, 1.1, 270);
-    wait.run(hardwareMap, .4);
+    wait.waitTime(.4);
     skystoneColor[0] = averageColor();
 
     drive.run(hardwareMap, .6, 167);
-    wait.run(hardwareMap, .4);
+    wait.waitTime(.4);
     skystoneColor[1] = averageColor();
 
     drive.run(hardwareMap, .54, 165);
-    wait.run(hardwareMap, .4);
+    wait.waitTime(.4);
     skystoneColor[2] = averageColor();
 
     if (skystoneColor[0] < skystoneColor[1] && skystoneColor[0] < skystoneColor[2]) {
@@ -53,7 +53,7 @@ public class BlueInnerPathLinear extends LinearOpMode {
       drive.run(hardwareMap, .62, 270);
       in.run();
       drive.run(hardwareMap, .7, 0, 0.5);
-      wait.run(hardwareMap, 1.2);
+      wait.waitTime(1.2);
       in.stop();
       drive.run(hardwareMap, 1, 90);
 
@@ -63,7 +63,7 @@ public class BlueInnerPathLinear extends LinearOpMode {
       drive.run(hardwareMap, .62, 270);
       in.run();
       drive.run(hardwareMap, .84, 0, 0.7);
-      wait.run(hardwareMap, 1.2);
+      wait.waitTime(1.2);
       in.stop();
       drive.run(hardwareMap, 1, 90);
 
@@ -74,7 +74,7 @@ public class BlueInnerPathLinear extends LinearOpMode {
       drive.run(hardwareMap, 0.38, 270);
       in.run();
       drive.run(hardwareMap, 0.8, 0, 0.7);
-      wait.run(hardwareMap, 1);
+      wait.waitTime(1);
       drive.run(hardwareMap, 0.8, 120);
       in.stop();
       turn.run(hardwareMap, -60);

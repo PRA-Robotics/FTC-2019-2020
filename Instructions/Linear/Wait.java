@@ -1,15 +1,11 @@
 import com.qualcomm.robotcore.hardware.*;
 
 public class Wait {
-  WaitInstruction wait;
+  static final int MILS_PER_SEC = 1000;
 
-/*
-  public Wait(HardwareMap hw, double seconds) {
-    wait = new WaitInstruction(hw, seconds);
-  }
-*/
-  public void run(HardwareMap hw, double seconds) {
-    wait = new WaitInstruction(hw, seconds);
-    while (!wait.act()) {}
+  public void waitTime(double seconds) {
+    ElapsedTime timer = new ElapsedTime();
+    finalTime = (int) (seconds * MILS_PER_SEC + timer.milliseconds());
+    while (timer.milliseconds() < finalTime) {}
   }
 }
