@@ -1,3 +1,5 @@
+import com.qualcomm.robotcore.hardware.*;
+
 public class LinDrive {
   DriveInstruction drive;
   static final double SQUARE = .598;

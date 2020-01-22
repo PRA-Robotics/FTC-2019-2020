@@ -1,3 +1,5 @@
+import com.qualcomm.robotcore.hardware.*;
+
 public class Wait {
   WaitInstruction wait;
 

@@ -3,7 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.*;
 
 @Autonomous(name = "Blue Inner (Linear OpMode)", group = "Autonomous")
-public class FoundationAndParkingBlue extends LinearOpMode {
+public class BlueInnerPathLinear extends LinearOpMode {
   Intake in;
   Outtake out;
   Claws claws;
@@ -18,7 +18,10 @@ public class FoundationAndParkingBlue extends LinearOpMode {
 
   double[] skystoneColor = new double[3];
 
-  public void init() {
+  int skystoneNum;
+
+  @Override
+  public void runOpMode() {
     in = new Intake(hardwareMap);
     out = new Outtake(hardwareMap);
     claws = new Claws(hardwareMap);
@@ -28,29 +31,28 @@ public class FoundationAndParkingBlue extends LinearOpMode {
     turn = new LinTurn();
 
     c = new Color(hardwareMap);
-  }
 
-  @Override
-  public void runOpMode() {
+    waitForStart();
+
     drive.run(hardwareMap, 1.1, 270);
     wait.run(hardwareMap, .4);
     skystoneColor[0] = averageColor();
 
-    drive.run(hardwareMap, .58, 170);
+    drive.run(hardwareMap, .6, 167);
     wait.run(hardwareMap, .4);
     skystoneColor[1] = averageColor();
 
-    drive.run(hardwareMap, .66, 170);
+    drive.run(hardwareMap, .54, 165);
     wait.run(hardwareMap, .4);
     skystoneColor[2] = averageColor();
 
     if (skystoneColor[0] < skystoneColor[1] && skystoneColor[0] < skystoneColor[2]) {
       skystoneNum = 0;
 
-      drive.run(hardwareMap, 0.6, 0);
+      drive.run(hardwareMap, 0.8, 0);
       drive.run(hardwareMap, .62, 270);
       in.run();
-      drive.run(hardwareMap, .72, 0, 0.4);
+      drive.run(hardwareMap, .7, 0, 0.5);
       wait.run(hardwareMap, 1.2);
       in.stop();
       drive.run(hardwareMap, 1, 90);
@@ -60,7 +62,7 @@ public class FoundationAndParkingBlue extends LinearOpMode {
 
       drive.run(hardwareMap, .62, 270);
       in.run();
-      drive.run(hardwareMap, .72, 0, 0.4);
+      drive.run(hardwareMap, .84, 0, 0.7);
       wait.run(hardwareMap, 1.2);
       in.stop();
       drive.run(hardwareMap, 1, 90);
@@ -71,11 +73,12 @@ public class FoundationAndParkingBlue extends LinearOpMode {
       turn.run(hardwareMap, -55);
       drive.run(hardwareMap, 0.38, 270);
       in.run();
-      drive.run(hardwareMap, 0.9, 0, 0.4);
-      wait.run(hardwareMap, 1.2);
-      drive.run(hardwareMap, 1, 90);
+      drive.run(hardwareMap, 0.8, 0, 0.7);
+      wait.run(hardwareMap, 1);
+      drive.run(hardwareMap, 0.8, 120);
+      in.stop();
       turn.run(hardwareMap, -60);
-      drive.run(hardwareMap, 3, 270);
+      drive.run(hardwareMap, 4.1, 270);
     }
   }
 
