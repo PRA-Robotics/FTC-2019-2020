@@ -5,12 +5,14 @@ import com.qualcomm.robotcore.hardware.*;
 @Autonomous(name = "Turn", group = "Autonomous")
 public class Turn extends OpMode {
   TurnInstruction turn1;
+  TurnInstruction turn2;
   Outtake out;
   int q;
 
   public void init() {
     out = new Outtake(hardwareMap);
-    turn1 = new TurnInstruction(hardwareMap, -360);
+    turn1 = new TurnInstruction(hardwareMap, 90);
+    turn2 = new TurnInstruction(hardwareMap, -90);
 
 
     q = 0; // add a multiplier to the speed on turn
@@ -22,6 +24,11 @@ public class Turn extends OpMode {
     switch(q){
       case 0: // move forward
         if (turn1.act()) {
+          q++;
+        }
+        break;
+      case 1: // move forward
+        if (turn2.act()) {
           q++;
         }
         break;

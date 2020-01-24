@@ -19,7 +19,8 @@ public class Claws {
   }
 
   public void down() {
-    claw1.setPosition(.02);
+    //.02
+    claw1.setPosition(0);
     claw2.setPosition(.74);
     currentPos = downPos;
   }

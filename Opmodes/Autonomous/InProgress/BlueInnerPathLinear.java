@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.*;
 public class BlueInnerPathLinear extends LinearOpMode {
   Intake in;
   Outtake out;
+  MiddlePassage mid;
   Claws claws;
 
   LinDrive drive;
@@ -34,52 +35,70 @@ public class BlueInnerPathLinear extends LinearOpMode {
 
     waitForStart();
 
-    drive.run(hardwareMap, 1.1, 270);
+    //out.open();
+
+    /*drive.run(hardwareMap, 1.2, 270);
     wait.waitTime(.4);
     skystoneColor[0] = averageColor();
 
-    drive.run(hardwareMap, .6, 167);
+    drive.run(hardwareMap, .56, 167);
     wait.waitTime(.4);
     skystoneColor[1] = averageColor();
 
-    drive.run(hardwareMap, .54, 165);
+    drive.run(hardwareMap, .51, 165);
     wait.waitTime(.4);
     skystoneColor[2] = averageColor();
 
     if (skystoneColor[0] < skystoneColor[1] && skystoneColor[0] < skystoneColor[2]) {
       skystoneNum = 0;
 
-      drive.run(hardwareMap, 0.8, 0);
-      drive.run(hardwareMap, .62, 270);
+
+      drive.run(hardwareMap, 0.7, 0);
+      drive.run(hardwareMap, .67, 270);
       in.run();
       drive.run(hardwareMap, .7, 0, 0.5);
-      wait.waitTime(1.2);
+      wait.waitTime(1.5);
       in.stop();
       drive.run(hardwareMap, 1, 90);
+      drive.run(hardwareMap, 4.7, 180);
 
     } else if (skystoneColor[1] < skystoneColor[0] && skystoneColor[1] < skystoneColor[2]) {
       skystoneNum = 1;
 
-      drive.run(hardwareMap, .62, 270);
+      drive.run(hardwareMap, .67, 270);
       in.run();
-      drive.run(hardwareMap, .84, 0, 0.7);
-      wait.waitTime(1.2);
+      drive.run(hardwareMap, .8, 0, 0.7);
+      wait.waitTime(1.5);
       in.stop();
-      drive.run(hardwareMap, 1, 90);
+      drive.run(hardwareMap, 0.8, 90);
+      drive.run(hardwareMap, 4.4, 180);
 
     } else if (skystoneColor[2] < skystoneColor[0] && skystoneColor[2] < skystoneColor[1]) {
       skystoneNum = 2;
 
       turn.run(hardwareMap, -55);
-      drive.run(hardwareMap, 0.38, 270);
+      drive.run(hardwareMap, 0.39, 270);
       in.run();
-      drive.run(hardwareMap, 0.8, 0, 0.7);
-      wait.waitTime(1);
-      drive.run(hardwareMap, 0.8, 120);
+      drive.run(hardwareMap, 0.76, 0, 0.7);
+      wait.waitTime(1.5);
+      drive.run(hardwareMap, 0.73, 120);
       in.stop();
-      turn.run(hardwareMap, -60);
+      turn.run(hardwareMap, -56.5);
       drive.run(hardwareMap, 4.1, 270);
-    }
+    }*/
+    drive.run(hardwareMap, .82, 0);
+    drive.run(hardwareMap, .5, 270);
+    claws.down();
+    wait.waitTime(.75);
+    drive.run(hardwareMap, 1.2, 90);
+    turn.run(hardwareMap, -135);
+    claws.reset();
+    out.close();
+    wait.waitTime(.75);
+    drive.run(hardwareMap, .42, 90);
+    turn.run(hardwareMap, 90);
+    drive.run(hardwareMap, .6, 0);
+    wait.waitTime(3);
   }
 
   public double averageColor(){
