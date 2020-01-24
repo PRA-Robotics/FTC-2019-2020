@@ -4,20 +4,14 @@ import com.qualcomm.robotcore.hardware.*;
 
 @Autonomous(name = "Blue Foundation (Linear OpMode)", group = "Autonomous")
 public class BlueFoundationLinear extends LinearOpMode {
-  Intake in;
-  Outtake out;
   Claws claws;
 
   LinDrive drive;
-
   LinTurn turn;
-
   Wait wait;
 
   @Override
   public void runOpMode() {
-    in = new Intake(hardwareMap);
-    out = new Outtake(hardwareMap);
     claws = new Claws(hardwareMap);
 
     drive = new LinDrive();
@@ -34,7 +28,8 @@ public class BlueFoundationLinear extends LinearOpMode {
     claws.reset();
     wait.waitTime(.75);
     drive.run(hardwareMap, 1.85, 90);
-    turn.run(hardwareMap, 30);
-    drive.run(hardwareMap, 1, 0);
+    //turn.run(hardwareMap, 30);
+    turn.run(hardwareMap, -330);
+    drive.run(hardwareMap, 1);
   }
 }
