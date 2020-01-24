@@ -1,5 +1,5 @@
 // IMU Test added
-import com.qualcomm.hardware.bosch.BNO055IMU;
+/*import com.qualcomm.hardware.bosch.BNO055IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -136,7 +136,7 @@ public class RemoteControl_IMUTest extends OpMode{
       /*motors[0].setPower(-gamepad1.right_stick_x*.6);
       motors[1].setPower(-gamepad1.right_stick_x*.6);
       motors[2].setPower(-gamepad1.right_stick_x*.6);
-      motors[3].setPower(-gamepad1.right_stick_x*.6);*/
+      motors[3].setPower(-gamepad1.right_stick_x*.6);
       flDrive.setPower(-gamepad1.right_stick_x*.6);
       frDrive.setPower(gamepad1.right_stick_x*.6);
       blDrive.setPower(-gamepad1.right_stick_x*.6);
@@ -169,7 +169,7 @@ public class RemoteControl_IMUTest extends OpMode{
     //End IMU Test
 
     }
-  
+
 
 
   public void motorInit(DcMotor m){
@@ -180,5 +180,4 @@ public class RemoteControl_IMUTest extends OpMode{
   public void move(double x, double y){//X and Y are local positioning based of current rotation
 
   }
-}
-
+}*/

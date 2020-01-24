@@ -53,6 +53,10 @@ public class TurnInstruction extends Instruction {
     frDrive.setPower(0);
     blDrive.setPower(0);
     brDrive.setPower(0);
+    runTo(flDrive, flDrive.getCurrentPosition());
+    runTo(frDrive, frDrive.getCurrentPosition());
+    runTo(blDrive, blDrive.getCurrentPosition());
+    runTo(brDrive, brDrive.getCurrentPosition());
     isDone = true;
   }
 
