@@ -22,9 +22,18 @@ public class Color{
     float max = Math.max(Math.max(Math.max(colors.red, colors.green), colors.blue), colors.alpha);
     return (double) colors.blue / max;
   }
-    public double getGreen(){
+
+  public double getGreen(){
       colors = colorSensor.getNormalizedColors();
       float max = Math.max(Math.max(Math.max(colors.red, colors.green), colors.blue), colors.alpha);
       return (double) colors.green / max;
+  }
+
+  public double averageColor(){
+    double sum = 0;
+    for(int i = 0; i < 1; i ++){
+      sum += getRed();
+    }
+    return sum / 1;
   }
 }

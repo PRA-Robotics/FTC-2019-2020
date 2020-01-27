@@ -15,19 +15,18 @@ public class Turn extends OpMode {
     turn2 = new TurnInstruction(hardwareMap, 90);
 
 
-    q = 0; // add a multiplier to the speed on turn
-    // get rid of req for stop within certain error
+    q = 0;
   }
 
   public void loop() {
     out.open();
     switch(q){
-      case 0: // move forward
+      case 0:
         if (turn1.act()) {
           q++;
         }
         break;
-      case 1: // move forward
+      case 1:
         if (turn2.act()) {
           q++;
         }

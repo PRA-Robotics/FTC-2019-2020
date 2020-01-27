@@ -109,11 +109,11 @@ public class RemoteControl extends OpMode {
 
 
 
-    if (gamepad2.right_bumper) {
+    /*if (gamepad2.right_bumper) {
       out.clampDown();
     } else {
       out.clampOut();
-    }
+    }*/
 
     if (gamepad2.dpad_up) {
       out.elevate();

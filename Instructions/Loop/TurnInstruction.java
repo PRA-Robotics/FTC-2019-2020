@@ -11,6 +11,8 @@ public class TurnInstruction extends Instruction {
     super(hw);
     if (angle < 0) {
       direction = -1.0;
+    }else{
+      direction = 1.0;
     }
     double correctionFactor = (360.0/830.0);
     flFinal = correctionFactor * 560 * (angle * Math.PI * RADIUS / 180) / CIRCUMFERENCE;
