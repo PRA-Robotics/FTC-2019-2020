@@ -79,7 +79,6 @@ public class RemoteControl extends OpMode {
 
       brDrive.setPower(speed * (Math.sqrt(2) * gamepad1.left_stick_y / 2 - Math.sqrt(2) * gamepad1.left_stick_x / 2) * Math.min(1 , 1 - gamepad1.right_stick_x));
 
-      //telemetry.addData("flpower", spd);
     }
 
     if (gamepad1.right_bumper || gamepad2.right_trigger > .1) {
@@ -160,10 +159,7 @@ public class RemoteControl extends OpMode {
       blDrive.setPower(-gamepad1.right_stick_x*.6 * speed);
       brDrive.setPower(gamepad1.right_stick_x*.6 * speed);
     }
-    telemetry.addData("gamepad1.y", gamepad1.left_stick_y);
-    telemetry.addData("gamepad1.x", gamepad1.left_stick_x);
-    lastYState = gamepad2.y;
-    lastAState = gamepad1.x;
+    telemetry.addData("encode", brDrive.getCurrentPosition());
   }
 
   public void motorInit(DcMotor m){

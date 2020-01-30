@@ -44,8 +44,8 @@ public class Outtake {
   }
 
   public void open() {
-    outLeft.setPosition(1);
-    outRight.setPosition(0);
+    outLeft.setPosition(.6);
+    outRight.setPosition(.3);
   }
 
   public void runMotorWithPower(double newPow) {

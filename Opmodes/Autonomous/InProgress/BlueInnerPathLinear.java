@@ -44,7 +44,7 @@ public class BlueInnerPathLinear extends LinearOpMode {
     wait.waitTime(.4);
     skystoneColor[1] = c.averageColor();
 
-    drive.run(hardwareMap, .51, 165);
+    drive.run(hardwareMap, .51, 175);
     wait.waitTime(.4);
     skystoneColor[2] = c.averageColor();
 
@@ -68,9 +68,9 @@ public class BlueInnerPathLinear extends LinearOpMode {
       in.run();
       drive.run(hardwareMap, .8, 0, 0.7);
       wait.waitTime(1.5);
-      drive.run(hardwareMap, .9, 90);
+      drive.run(hardwareMap, .8, 90);
       in.stop();
-      drive.run(hardwareMap, 4.4, 175);
+      drive.run(hardwareMap, 4.4, 180);
 
     } else if (skystoneColor[2] < skystoneColor[0] && skystoneColor[2] < skystoneColor[1]) {
       skystoneNum = 2;
