@@ -23,8 +23,9 @@ public class RemoteControl extends OpMode {
   boolean outToggle = false;
   boolean clawIsDown;
   boolean lastYState = false;
-  boolean lastAState = false;
+  boolean lastXState = false;
   boolean open = false;
+  boolean midOut = false;
   int delay = 0;
   int delay2 = 0;
 
@@ -133,15 +134,23 @@ public class RemoteControl extends OpMode {
 
     if (gamepad2.y && !lastYState) {
       OutIsClosed = !OutIsClosed;
-    }
-      //outToggle = true;
-    if (!OutIsClosed) {
-      out.close();
-    } else {
-      out.open();
+      midOut = false;
     }
 
-    if (gamepad1.x && !lastAState) {
+    if(gamepad2.right_bumper){
+      midOut = true;
+      OutIsClosed = true;
+    }
+      //outToggle = true;
+    if (!OutIsClosed && !midOut) {
+      out.close();
+    } else if(!midOut){
+      out.open();
+    }else{
+      out.middle();
+    }
+
+    if (gamepad1.x && !lastXState) {
       clawIsDown = !clawIsDown;
     }
 
@@ -159,6 +168,8 @@ public class RemoteControl extends OpMode {
       blDrive.setPower(-gamepad1.right_stick_x*.6 * speed);
       brDrive.setPower(gamepad1.right_stick_x*.6 * speed);
     }
+    lastYState = gamepad2.y;
+    lastXState = gamepad1.x;
     telemetry.addData("encode", brDrive.getCurrentPosition());
   }
 
