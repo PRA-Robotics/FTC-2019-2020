@@ -55,13 +55,21 @@ public class DriveInstruction extends Instruction{
   }
 
   private void end(){
-    while(!(isCloseEnough(flDrive) && isCloseEnough(frDrive) && isCloseEnough(blDrive) && isCloseEnough(brDrive))){
-      speed = 0.4;
+    //while(!(isCloseEnough(flDrive) && isCloseEnough(frDrive) && isCloseEnough(blDrive) && isCloseEnough(brDrive))){
+      speed = 1;
       runTo(flDrive, (int)flPosition);
       runTo(frDrive, (int)frPosition);
       runTo(blDrive, (int)blPosition);
       runTo(brDrive, (int)brPosition);
-    }
+      int delay = 0;
+      while(delay < 40){
+        runTo(flDrive, (int)flPosition);
+        runTo(frDrive, (int)frPosition);
+        runTo(blDrive, (int)blPosition);
+        runTo(brDrive, (int)brPosition);
+        delay ++;
+      }
+    //}
     flDrive.setPower(0);
     frDrive.setPower(0);
     blDrive.setPower(0);

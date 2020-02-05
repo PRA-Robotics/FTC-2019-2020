@@ -56,15 +56,15 @@ public class BlueInnerPathLinear extends LinearOpMode {
     out.open();
     claws.reset();
 
-    drive.run(hardwareMap, 1.2, 270);
+    drive.run(hardwareMap, 1.15, 270);
     wait.waitTime(.4);
     skystoneColor[0] = c.averageColor();
 
-    drive.run(hardwareMap, .56, 167);
+    drive.run(hardwareMap, .42, 174);
     wait.waitTime(.4);
     skystoneColor[1] = c.averageColor();
 
-    drive.run(hardwareMap, .51, 175);
+    drive.run(hardwareMap, .32, 174);
     wait.waitTime(.4);
     skystoneColor[2] = c.averageColor();
 
