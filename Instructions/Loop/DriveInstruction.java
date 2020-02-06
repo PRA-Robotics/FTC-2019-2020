@@ -62,7 +62,7 @@ public class DriveInstruction extends Instruction{
       runTo(blDrive, (int)blPosition);
       runTo(brDrive, (int)brPosition);
       int delay = 0;
-      while(delay < 40){
+      while(delay < 30){
         runTo(flDrive, (int)flPosition);
         runTo(frDrive, (int)frPosition);
         runTo(blDrive, (int)blPosition);

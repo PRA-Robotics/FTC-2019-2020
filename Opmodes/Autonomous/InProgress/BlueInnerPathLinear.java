@@ -57,15 +57,15 @@ public class BlueInnerPathLinear extends LinearOpMode {
     claws.reset();
 
     drive.run(hardwareMap, 1.15, 270);
-    wait.waitTime(.4);
+    wait.waitTime(.2);
     skystoneColor[0] = c.averageColor();
 
     drive.run(hardwareMap, .42, 174);
-    wait.waitTime(.4);
+    wait.waitTime(.2);
     skystoneColor[1] = c.averageColor();
 
     drive.run(hardwareMap, .32, 174);
-    wait.waitTime(.4);
+    wait.waitTime(.2);
     skystoneColor[2] = c.averageColor();
 
     if (skystoneColor[0] < skystoneColor[1] && skystoneColor[0] < skystoneColor[2]) {
@@ -83,13 +83,13 @@ public class BlueInnerPathLinear extends LinearOpMode {
     } else if (skystoneColor[1] < skystoneColor[0] && skystoneColor[1] < skystoneColor[2]) {
       skystoneNum = 1;
 
-      drive.run(hardwareMap, .64, 270);
+      drive.run(hardwareMap, .52, 270);
       in.run();
-      drive.run(hardwareMap, .8, 0, 0.7);
+      drive.run(hardwareMap, .57, 0, 0.7);
       wait.waitTime(1.5);
       drive.run(hardwareMap, .85, 90);
       in.stop();
-      drive.run(hardwareMap, 4.4, 180);
+      drive.run(hardwareMap, 4.05, 180);
 
     } else if (skystoneColor[2] < skystoneColor[0] && skystoneColor[2] < skystoneColor[1]) {
       skystoneNum = 2;
@@ -104,15 +104,15 @@ public class BlueInnerPathLinear extends LinearOpMode {
       in.stop();
       drive.run(hardwareMap, 4.1, 180);
     }
-    drive.run(hardwareMap, 1.0);
-    drive.run(hardwareMap, .65, 270);
+    drive.run(hardwareMap, 0.8);
+    drive.run(hardwareMap, .58, 270);
     claws.down();
-    wait.waitTime(.75);
+    wait.waitTime(.5);
     drive.run(hardwareMap, 1.25, 90);
     turn.run(hardwareMap, -150);
     claws.reset();
     out.close();
-    wait.waitTime(.75);
+    wait.waitTime(.5);
     drive.run(hardwareMap, .42, 90);
     turn.run(hardwareMap, 125);
     drive.run(hardwareMap, .6, 180);

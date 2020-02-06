@@ -20,13 +20,13 @@ public class Claws {
 
   public void down() {
     //.02
-    claw1.setPosition(0);
+    claw1.setPosition(0.1);
     claw2.setPosition(.74);
     currentPos = downPos;
   }
 
   public void reset() {
-    claw1.setPosition(.52);
+    claw1.setPosition(.62);
     claw2.setPosition(.25);
     currentPos = upPos;
   }
