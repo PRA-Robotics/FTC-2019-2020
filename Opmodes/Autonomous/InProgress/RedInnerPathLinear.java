@@ -36,10 +36,10 @@ public class RedInnerPathLinear extends LinearOpMode {
     |        |        ()       ()        |        |
     |        |        ()       ()        |        |
     |________|        (*)     (*)        |________|
-    | ______          ()       ()                 |
-    |(  |  )          ()       ()                 |
-    |() v ()          (*)     (*)                 |
-    |                                             |
+    | _180__          ()       ()                 |
+    |(  |  )270       ()       ()                 |
+    |() v (*)         (*)     (*)                 |
+    |   0                                         |
     |---------------------------------------------|
     |                                             |
     |               _____      _____              |
@@ -56,28 +56,28 @@ public class RedInnerPathLinear extends LinearOpMode {
     claws.reset();
 
     drive.run(hardwareMap, 1.12, 270);
-    wait.waitTime(.15);
+    wait.waitTime(.1);
     skystoneColor[0] = c.averageColor();
 
     drive.run(hardwareMap, .42, 174);
-    wait.waitTime(.15);
+    wait.waitTime(.1);
     skystoneColor[1] = c.averageColor();
 
     drive.run(hardwareMap, .32, 174);
-    wait.waitTime(.15);
+    wait.waitTime(.1);
     skystoneColor[2] = c.averageColor();
 
     if (skystoneColor[0] < skystoneColor[1] && skystoneColor[0] < skystoneColor[2]) {
       skystoneNum = 0;
 
-      drive.run(hardwareMap, 0.7, 0);
-      drive.run(hardwareMap, .64, 270);
+      drive.run(hardwareMap, 0.44, 0);
+      drive.run(hardwareMap, .48, 270);
       in.run();
-      drive.run(hardwareMap, .7, 0, 0.5);
-      wait.waitTime(1.5);
-      drive.run(hardwareMap, 1, 90);
+      drive.run(hardwareMap, .46, 0, 0.5);
+      wait.waitTime(.65);
+      drive.run(hardwareMap, .8, 90);
       in.stop();
-      drive.run(hardwareMap, 4.7, 0);
+      drive.run(hardwareMap, 2.7, 0);
 
     } else if (skystoneColor[1] < skystoneColor[0] && skystoneColor[1] < skystoneColor[2]) {
       skystoneNum = 1;
@@ -85,40 +85,41 @@ public class RedInnerPathLinear extends LinearOpMode {
       drive.run(hardwareMap, .48, 270);
       in.run();
       drive.run(hardwareMap, .57, 0, 0.7);
-      wait.waitTime(1);
+      wait.waitTime(.8);
       drive.run(hardwareMap, .77, 90);
       in.stop();
       drive.run(hardwareMap, 2.85, 0);
 
     } else if (skystoneColor[2] < skystoneColor[0] && skystoneColor[2] < skystoneColor[1]) {
-      skystoneNum = 2;
-      drive.run(hardwareMap, .48, 175);
-      drive.run(hardwareMap, .64, 270);
+      skystoneNum = 0;
+
+      drive.run(hardwareMap, 0.44, 177);
+      drive.run(hardwareMap, .48, 270);
       in.run();
-      drive.run(hardwareMap, .69, 0, 0.7);
-      wait.waitTime(1.5);
-      drive.run(hardwareMap, .92, 90);
+      drive.run(hardwareMap, .46, 0, 0.5);
+      wait.waitTime(.65);
+      drive.run(hardwareMap, .8, 90);
       in.stop();
-      drive.run(hardwareMap, 4.4, 0);
+      drive.run(hardwareMap, 2.7, 0);
     }
     drive.run(hardwareMap, .54, 270);
     claws.down();
-    wait.waitTime(.5);
+    wait.waitTime(.4);
     drive.run(hardwareMap, 1, 90);
     turn.run(hardwareMap, 140);
     claws.reset();
     out.close();
-    wait.waitTime(.2);
+    wait.waitTime(.4);
     drive.run(hardwareMap, .42, 90);
-    turn.run(hardwareMap, 125);
+    turn.run(hardwareMap, -125);
     drive.run(hardwareMap, .6, 180);
     mid.runMotor();
     out.runWheelsOut();
-    wait.waitTime(3);
+    wait.waitTime(2.5);
     out.open();
     out.stopWheels();
     mid.stop();
-    drive.run(hardwareMap, 0.75, 270);
+    drive.run(hardwareMap, 0.7, 90);
     drive.run(hardwareMap, 1.75);
   }
 }
