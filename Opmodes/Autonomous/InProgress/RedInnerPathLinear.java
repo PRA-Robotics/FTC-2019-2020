@@ -55,16 +55,16 @@ public class RedInnerPathLinear extends LinearOpMode {
     out.open();
     claws.reset();
 
-    drive.run(hardwareMap, 1.2, 270);
-    wait.waitTime(.4);
+    drive.run(hardwareMap, 1.12, 270);
+    wait.waitTime(.15);
     skystoneColor[0] = c.averageColor();
 
-    drive.run(hardwareMap, .54, 165);
-    wait.waitTime(.4);
+    drive.run(hardwareMap, .42, 174);
+    wait.waitTime(.15);
     skystoneColor[1] = c.averageColor();
 
-    drive.run(hardwareMap, .5, 165);
-    wait.waitTime(.4);
+    drive.run(hardwareMap, .32, 174);
+    wait.waitTime(.15);
     skystoneColor[2] = c.averageColor();
 
     if (skystoneColor[0] < skystoneColor[1] && skystoneColor[0] < skystoneColor[2]) {
@@ -82,13 +82,13 @@ public class RedInnerPathLinear extends LinearOpMode {
     } else if (skystoneColor[1] < skystoneColor[0] && skystoneColor[1] < skystoneColor[2]) {
       skystoneNum = 1;
 
-      drive.run(hardwareMap, .64, 270);
+      drive.run(hardwareMap, .48, 270);
       in.run();
-      drive.run(hardwareMap, .8, 0, 0.7);
-      wait.waitTime(1.5);
-      drive.run(hardwareMap, .85, 90);
+      drive.run(hardwareMap, .57, 0, 0.7);
+      wait.waitTime(1);
+      drive.run(hardwareMap, .77, 90);
       in.stop();
-      drive.run(hardwareMap, 4.4, 0);
+      drive.run(hardwareMap, 2.85, 0);
 
     } else if (skystoneColor[2] < skystoneColor[0] && skystoneColor[2] < skystoneColor[1]) {
       skystoneNum = 2;
@@ -101,15 +101,14 @@ public class RedInnerPathLinear extends LinearOpMode {
       in.stop();
       drive.run(hardwareMap, 4.4, 0);
     }
-    drive.run(hardwareMap, 1.3, 180);
-    drive.run(hardwareMap, .6, 270);
+    drive.run(hardwareMap, .54, 270);
     claws.down();
-    wait.waitTime(.75);
-    drive.run(hardwareMap, 1.25, 90);
-    turn.run(hardwareMap, 150);
+    wait.waitTime(.5);
+    drive.run(hardwareMap, 1, 90);
+    turn.run(hardwareMap, 140);
     claws.reset();
     out.close();
-    wait.waitTime(.75);
+    wait.waitTime(.2);
     drive.run(hardwareMap, .42, 90);
     turn.run(hardwareMap, 125);
     drive.run(hardwareMap, .6, 180);
@@ -119,7 +118,7 @@ public class RedInnerPathLinear extends LinearOpMode {
     out.open();
     out.stopWheels();
     mid.stop();
-    drive.run(hardwareMap, 1.0, 270);
+    drive.run(hardwareMap, 0.75, 270);
     drive.run(hardwareMap, 1.75);
   }
 }

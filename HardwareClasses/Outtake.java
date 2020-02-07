@@ -39,8 +39,8 @@ public class Outtake {
   }*/
 
   public void close() {
-    outLeft.setPosition(0.);
-    outRight.setPosition(1);
+    outLeft.setPosition(0.05);
+    outRight.setPosition(.95);
   }
 
   public void middle(){
