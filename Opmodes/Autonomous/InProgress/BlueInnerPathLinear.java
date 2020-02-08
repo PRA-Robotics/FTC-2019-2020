@@ -76,7 +76,7 @@ public class BlueInnerPathLinear extends LinearOpMode {
       in.run();
       drive.run(hardwareMap, .46, 0, 0.5);
       wait.waitTime(.65);
-      drive.run(hardwareMap, .8, 90);
+      drive.run(hardwareMap, .7, 90);
       in.stop();
       drive.run(hardwareMap, 3.27, 180);
 
@@ -87,7 +87,7 @@ public class BlueInnerPathLinear extends LinearOpMode {
       in.run();
       drive.run(hardwareMap, .57, 0, 0.7);
       wait.waitTime(.8);
-      drive.run(hardwareMap, .77, 90);
+      drive.run(hardwareMap, .67, 90);
       in.stop();
       drive.run(hardwareMap, 2.85, 180);
 
@@ -104,12 +104,12 @@ public class BlueInnerPathLinear extends LinearOpMode {
       wait.waitTime(.15);
       in.run();
       wait.waitTime(.3);
-      drive.run(hardwareMap, 0.6, 120);
+      drive.run(hardwareMap, 0.53, 120);
       turn.run(hardwareMap, 60);
       in.stop();
       drive.run(hardwareMap, 2.7, 180);
     }
-    drive.run(hardwareMap, .54, 270);
+    drive.run(hardwareMap, .45, 270);
     claws.down();
     wait.waitTime(.5);
     drive.run(hardwareMap, 1, 90);

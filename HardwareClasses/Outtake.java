@@ -48,6 +48,11 @@ public class Outtake {
     outRight.setPosition(0.85);
   }
 
+  public void superClosed(){
+    outLeft.setPosition(0);
+    outRight.setPosition(1);
+  }
+
   public void open() {
     outLeft.setPosition(.6);
     outRight.setPosition(.3);

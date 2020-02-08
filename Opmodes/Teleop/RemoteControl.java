@@ -26,6 +26,7 @@ public class RemoteControl extends OpMode {
   boolean lastXState = false;
   boolean open = false;
   boolean midOut = false;
+  boolean superClosed = false;
   int delay = 0;
   int delay2 = 0;
 
@@ -135,19 +136,27 @@ public class RemoteControl extends OpMode {
     if (gamepad2.y && !lastYState) {
       OutIsClosed = !OutIsClosed;
       midOut = false;
+      superClosed = false;
     }
 
     if(gamepad2.right_bumper){
       midOut = true;
       OutIsClosed = true;
+      superClosed = false;
+    } else if(gamepad2.left_bumper) {
+      superClosed = true;
+      midOut = false;
+      OutIsClosed = true;
     }
       //outToggle = true;
-    if (!OutIsClosed && !midOut) {
+    if (!OutIsClosed && !midOut && !superClosed) {
       out.close();
-    } else if(!midOut){
+    } else if(!midOut && !superClosed){
       out.open();
-    }else{
+    }else if(!superClosed){
       out.middle();
+    }else{
+      out.superClosed();
     }
 
     if (gamepad1.x && !lastXState) {
