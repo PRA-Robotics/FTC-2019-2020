@@ -88,7 +88,7 @@ public class RedInnerPathLinear extends LinearOpMode {
       wait.waitTime(.8);
       drive.run(hardwareMap, .65, 90);
       in.stop();
-      drive.run(hardwareMap, 3.3, 0);
+      drive.run(hardwareMap, 3.35, 0);
 
     } else if (skystoneColor[2] < skystoneColor[0] && skystoneColor[2] < skystoneColor[1]) {
       skystoneNum = 0;
@@ -106,7 +106,7 @@ public class RedInnerPathLinear extends LinearOpMode {
     claws.down();
     wait.waitTime(.4);
     drive.run(hardwareMap, 1, 90);
-    turn.run(hardwareMap, 145);
+    turn.run(hardwareMap, 155);
     claws.reset();
     out.close();
     wait.waitTime(.4);
